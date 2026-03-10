@@ -110,7 +110,7 @@ SECOES = {
             ("Finalidade", "Registrar, controlar e evidenciar os atos e fatos da gestão pública."),
             ("Abrangência", "Acompanha orçamento, execução financeira, patrimônio e suas variações."),
             ("Campo de aplicação", "É aplica aos quatro níveis de governo: Federal, Estadual, Municipal, Distrito Federal, aos três Poderes constituídos, bem como as suas autarquias e fundações."),
-            ("Normas", "A disciplina se apoia na Lei 4.320/64, nas NBC T SP / NBC TSP e no MCASP.")
+            ("Normas", "A disciplina se apoia na Lei 4.320/64, nas NBC TSP e no MCASP.")
         ],
         "fala": "Nesta seção, continuamos a mostar a lógica do orçamento, mas avançando para a evidenciação patrimonial."
     },
@@ -307,6 +307,19 @@ elif pagina == "Programa da Disciplina":
         st.markdown('<div class="box"><h4>1.6 Bibliografia recomendada</h4>' + "".join([f"<p>• {x}</p>" for x in sec["bibliografia"]]) + '</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="box"><h4>1.7 Curriculum resumido do professor</h4><p>{sec["curriculum"]}</p></div>', unsafe_allow_html=True)
 
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+
 # =========================
 # BLOCOS TEÓRICOS
 # =========================
@@ -341,15 +354,6 @@ elif pagina in [
             unsafe_allow_html=True
         )
 
-        # st.markdown(
-        #     f"""
-        #     <div class="box">
-        #         <h4>Observação</h4>
-        #         <p>{sec["fala"]}</p>
-        #     </div>
-        #     """,
-        #     unsafe_allow_html=True
-        # )
     st.divider()
     st.markdown('<div class="section-title"></div>', unsafe_allow_html=True)
     cols = st.columns(2)
@@ -366,6 +370,19 @@ elif pagina in [
             )
 
 ##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+
 # Seção específica para Contabilidade Aplicada ao Setor Público
     if pagina == "Contabilidade Aplicada ao Setor Público":
         st.divider()
@@ -466,16 +483,24 @@ elif pagina in [
         df_dif_entre_conts = pd.DataFrame(dados)
         st.dataframe(df_dif_entre_conts, hide_index=True, use_container_width=True)
 
-
 ##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+
     if pagina == "Plano de Contas e Subsistemas":
         ##################################################################################################################
         # Seção: Plano de Contas e Subsistemas
         st.divider()
-        # st.markdown(
-        # '<div class="section-title">Plano de Contas e Subsistemas</div>',
-        # unsafe_allow_html=True
-        # )
 
         st.markdown(
         """
@@ -491,8 +516,7 @@ elif pagina in [
         <div class="light-box">
         <h4>Exemplo</h4>
         <p>
-        Receber dinheiro e pagar uma dívida são operações diferentes, mas ambas envolvem recursos financeiros.  
-        Essas transações são registradas em contas representativas dessa natureza, como <b>Caixa</b> ou <b>Tesouraria</b>.
+        Aas operações de recebimento de recursos financeiros e de pagamento de obrigações correspondem a transações distintas do ponto de vista administrativo. Contudo, ambas envolvem movimentações relacionadas ao dinheiro disponível da entidade. Para registrar essas operações de forma organizada, utiliza-se uma conta específica que representa esse elemento patrimonial, usualmente denominada Caixa ou Tesouraria.
         </p>
         </div>
         """,
@@ -572,6 +596,7 @@ elif pagina in [
             st.markdown(
             """
             <div class="light-box">
+
             As contas são estruturadas em <b>níveis de desdobramento</b>, partindo do nível mais sintético para o mais analítico, de forma a atender diferentes necessidades de informação.
             </div>
             """,
@@ -581,9 +606,10 @@ elif pagina in [
             st.markdown(
             """
             <div class="light-box">
+
             <b>NATUREZA DAS CONTAS:<br><br>
             </b> No PCASP, a natureza das contas pode ser identificada pela numeração da classe:<br><br>
-            • Contas iniciadas por número **ímpar** → natureza **devedora**<br><br>  
+            • Contas iniciadas por número **ímpar** → natureza **devedora**<br> 
             • Contas iniciadas por número **par** → natureza **credora**
             </div>
             """,
@@ -625,6 +651,7 @@ elif pagina in [
             st.markdown(
             """
             <div class="light-box">
+
             <b>Contas sintéticas</b> representam contas de nível mais agregado.  
             <b>Contas analíticas</b> representam o detalhamento das contas sintéticas, podendo chegar ao nível de <b>conta corrente</b>.
             </div>
@@ -651,7 +678,7 @@ elif pagina in [
         "Subsistema": [
         "Orçamentário",
         "Patrimonial",
-        "Compensação"
+        "Controle"
         ],
 
         "Descrição": [
@@ -671,7 +698,9 @@ elif pagina in [
             st.markdown(
             """
             <div class="light-box">
+
             Exemplos de registros no sistema de compensação incluem:
+
             <ul>
                 <li>contratos / convênios</li>
                 <li>garantias / cauções / fianças</li>
@@ -682,6 +711,50 @@ elif pagina in [
             """,
             unsafe_allow_html=True
             )
+
+        st.divider()
+        st.markdown('<div class="section-title">PCASP - Detalhamento do Código da Conta Contábil</div>', unsafe_allow_html=True)
+
+        img_col1, img_col2 = st.columns(2)
+
+        with img_col1:
+            st.image(
+                "imagens/mcasp_desdobramento_niveis_pcasp.png",  # imagem da página do Detalhamento dos Níveis das Contas do PCASP
+                caption="PCASP - Níveis de desdobramento",
+                use_container_width=True
+            )
+            # st.markdown(
+            #     """
+            #     <div class="light-box">
+            #         <h4>Link de acesso</h4>
+            #         <p><a href="https://siconfi.tesouro.gov.br/siconfi/pages/public/conteudo/conteudo.jsf?id=12503" target="_blank">
+            #         Acessar página do Anexo II da Portaria STN 642, de 20 de Setembro de 2019 (Leiaute MSC)
+            #         </a></p>
+            #     </div>
+            #     """,
+            #     unsafe_allow_html=True
+            # )
+
+            st.markdown(
+                """
+                <div class="light-box">
+                    <h4>Link de acesso</h4>
+                    <p><a href="https://www.tesourotransparente.gov.br/publicacoes/manual-de-contabilidade-aplicada-ao-setor-publico-mcasp/2025/26" target="_blank">
+                    Acessar página do MCASP
+                    </a></p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with img_col2:
+            st.image(
+                "imagens/mcasp_niveis_de_consolidacao_pcasp.png",  # imagem da página dos Níveis de Consolidação (OFSS) do PCASP
+                caption="PCASP - Níveis de Consolidação (OFSS)",
+                use_container_width=True
+            )
+
+        st.divider()
 
 
 ##################################################################################################################
@@ -699,7 +772,7 @@ elif pagina in [
 
 
     if pagina == "Registro das Operações Típicas":
-        st.markdown('<div class="section-title">Fluxos essenciais</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title">Fases (Estágios) da Receita e Despesa</div>', unsafe_allow_html=True)
         st.code("Receita: Previsão -> Lançamento -> Arrecadação -> Recolhimento", language=None)
         st.code("Despesa: Dotação -> Empenho -> Liquidação -> Pagamento", language=None)
 
@@ -758,57 +831,51 @@ elif pagina in [
 
         st.divider()
 
-        st.markdown('<div class="section-title">Exemplos de registros contábeis</div>', unsafe_allow_html=True)
+        # st.markdown('<div class="section-title">Exemplos de registros contábeis</div>', unsafe_allow_html=True)
 
-        st.markdown(
-        """
-        <div class="light-box">
-        <b>Arrecadação de receitas públicas</b>
+        # st.markdown(
+        # """
+        # <b>Arrecadação de receitas públicas</b>
+        # <div class="light-box">
 
-        Exemplo: recebimento de tributos.
+        # Exemplo: recebimento de tributos.
 
-        Registro conceitual:
+        # Débito – Caixa ou Bancos  
+        # Crédito – Receita Tributária
+        # </div>
+        # """,
+        # unsafe_allow_html=True
+        # )
 
-        Débito – Caixa ou Bancos  
-        Crédito – Receita Tributária
-        </div>
-        """,
-        unsafe_allow_html=True
-        )
+        # st.markdown(
+        # """
+        # <b>Execução da despesa pública</b>
+        # <div class="light-box">
+        
+        # Exemplo: pagamento de fornecedores.
 
-        st.markdown(
-        """
-        <div class="light-box">
-        <b>Execução da despesa pública</b>
+        # Débito – Despesa  
+        # Crédito – Caixa ou Obrigações a Pagar
+        # </div>
+        # """,
+        # unsafe_allow_html=True
+        # )
 
-        Exemplo: pagamento de fornecedores.
+        # st.markdown(
+        # """
+        # <b>Aquisição de bens ou serviços</b>
+        # <div class="light-box">
+        
+        # Exemplo: compra de equipamentos para a administração pública.
 
-        Registro conceitual:
+        # Débito – Ativo Imobilizado  
+        # Crédito – Caixa ou Fornecedores
+        # </div>
+        # """,
+        # unsafe_allow_html=True
+        # )
 
-        Débito – Despesa  
-        Crédito – Caixa ou Obrigações a Pagar
-        </div>
-        """,
-        unsafe_allow_html=True
-        )
-
-        st.markdown(
-        """
-        <div class="light-box">
-        <b>Aquisição de bens ou serviços</b>
-
-        Exemplo: compra de equipamentos para a administração pública.
-
-        Registro patrimonial:
-
-        Débito – Ativo Imobilizado  
-        Crédito – Caixa ou Fornecedores
-        </div>
-        """,
-        unsafe_allow_html=True
-        )
-
-        st.divider()
+        # st.divider()
 
 
         st.markdown('<div class="section-title">Características qualitativas da informação contábil</div>', unsafe_allow_html=True)
@@ -854,15 +921,18 @@ elif pagina in [
 
         ############################################################
 
-        st.markdown("## Simulador de Lançamentos da Contabilidade Pública")
+        st.markdown("## Lançamentos Típicos da Contabilidade Aplicada ao Setor Público")
 
         evento = st.selectbox(
-            "Escolha o evento contábil",
+            "Escolha um Ato/Fato Contábil",
             [
-                "Arrecadação de tributo",
+                "Arrecadação E Recolhimento de tributo não lançado",
+                "Arrecadação E Recolhimento de tributo lançado",
                 "Empenho da despesa",
                 "Liquidação da despesa",
                 "Pagamento da despesa",
+                "Apropriação da VPD antes da liquidação",
+                "Apropriação da VPD após a liquidação",
                 "Aquisição de veículo",
                 "Depreciação de bem público",
                 "Inscrição em restos a pagar",
@@ -874,69 +944,230 @@ elif pagina in [
 
         if mostrar:
 
-            if evento == "Arrecadação de tributo":
-
-                st.markdown("### Arrecadação de tributo")
-
+            if evento == "Arrecadação E Recolhimento de tributo não lançado":
+                st.markdown("### Arrecadação E Recolhimento de tributo não lançado")
                 st.markdown("**Registro Patrimonial**")
-
                 st.success("""
-        Débito: Caixa ou Bancos  
-        Crédito: Receita Tributária (VPA)
+        Débito: 1.1.1.1.x.xx.xx - Caixa e Equivalentes de Caixa em Moeda Nacional (F)\n  
+        Crédito: 4.1.X.X.x.xx.xx - Receita Tributária (VPA)
+        """)
+                st.info("Efeito: aumento do patrimônio líquido.")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.1.1.x.xx.xx - Receita a Realizar (Corrente ou Capital)\n  
+        Crédito: 6.2.1.2.x.xx.xx - Receita Realizada (Corrente ou Capital)
+        """)
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 7.2.1.1.x.xx.xx - Controle da Disponibilidade de Recursos\n
+        Crédito: 8.2.1.1.1.xx.xx - Disponibilidade por Destinação de Recursos (DDR)
+        """)
+                
+            elif evento == "Arrecadação E Recolhimento de tributo lançado":
+                st.markdown("### Arrecadação E Recolhimento de tributo lançado")
+                st.markdown("**1º Momento (fato gerador):**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito: 1.1.2.1.x.xx.xx  - Créditos Tributários a Receber (P)\n  
+        Crédito: 4.1.X.X.x.xx.xx - Receita Tributária (VPA)
+        """)
+                st.info("Efeito: aumento do patrimônio líquido.")
+                st.markdown("---")
+                st.markdown("**2º Momento (Arrecadação e Recolhimento):**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito: 1.1.1.1.x.xx.xx - Caixa e Equivalentes de Caixa em Moeda Nacional (F)\n
+        Crédito: 1.1.2.1.x.xx.xx  - Créditos Tributários a Receber (P)
+        """)
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.1.1.x.xx.xx - Receita a Realizar (Corrente ou Capital)\n  
+        Crédito: 6.2.1.2.x.xx.xx - Receita Realizada (Corrente ou Capital)
+        """)
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 7.2.1.1.x.xx.xx - Controle da Disponibilidade de Recursos\n
+        Crédito: 8.2.1.1.1.xx.xx - Disponibilidade por Destinação de Recursos (DDR)
         """)
 
-                st.info("Efeito: aumento do patrimônio líquido.")
 
             elif evento == "Empenho da despesa":
-
                 st.markdown("### Empenho da despesa")
-
                 st.markdown("**Registro Orçamentário**")
-
                 st.success("""
-        Débito: Dotação Orçamentária Disponível  
-        Crédito: Crédito Empenhado a Liquidar
+        Débito: 6.2.2.1.1.xx.xx - Crédito Disponível\n  
+        Crédito: 6.2.2.1.3.01.xx - Crédito Empenhado a Liquidar
+        """)
+                st.info("O empenho não gera efeito patrimonial.")
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.1.xx.xx - Disponibilidade por Destinação de Recursos (DDR)\n  
+        Crédito: 8.2.1.1.2.xx.xx - DDR Comprometida por Empenho
         """)
 
-                st.info("O empenho não gera efeito patrimonial.")
 
             elif evento == "Liquidação da despesa":
-
                 st.markdown("### Liquidação da despesa")
-
-                st.markdown("**Registro Orçamentário**")
-
+                st.markdown("**Registro Patrimonial**")
                 st.success("""
-        Débito: Crédito Empenhado a Liquidar  
+        Débito:  3.3.2.x.x.xx.xx - Variação Patrimonial Diminutiva – Serviços (VPD)\n  
+        Crédito: 2.1.3.x.x.xx.xx - Fornecedores e Contas a Pagar a Curto Prazo (F)
+        """)
+                st.info("Aqui ocorre a variação patrimonial diminutiva.")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: Crédito Empenhado a Liquidar\n  
         Crédito: Crédito Empenhado Liquidado
         """)
-
-                st.markdown("**Registro Patrimonial**")
-
+                st.markdown("**Registro Controle**")
                 st.success("""
-        Débito: Despesa (VPD)  
-        Crédito: Obrigações a Pagar
+        Débito: 8.2.1.1.2.xx.xx - DDR Comprometida por Empenho\n  
+        Crédito: 8.2.1.1.3.xx.xx - DDR Comprometida por Liquidação e Entradas Compensatórias
         """)
 
-                st.info("Aqui ocorre a variação patrimonial diminutiva.")
 
             elif evento == "Pagamento da despesa":
-
                 st.markdown("### Pagamento da despesa")
-
                 st.markdown("**Registro Orçamentário**")
-
                 st.success("""
         Débito: Crédito Empenhado Liquidado  
         Crédito: Crédito Empenhado Pago
         """)
-
                 st.markdown("**Registro Patrimonial**")
-
                 st.success("""
         Débito: Obrigações a Pagar  
         Crédito: Caixa ou Bancos
         """)
+                
+
+            elif evento == "Apropriação da VPD antes da liquidação":
+                st.markdown("### Apropriação da VPD antes da liquidação")
+                st.markdown("**1º Apropriação mensal (1/12 do 13º salário):**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito: 3.1.1.x.x.xx.xx  - Remuneração a Pessoal\n  
+        Crédito: 2.1.1.1.x.xx.xx - Pessoal a Pagar - 13º Salário (P)
+        """)
+                st.info("Efeito: diminuição do patrimônio líquido.")
+                st.markdown("---")
+                st.markdown("**2º EMPENHO nos meses do pagamento:**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito:  2.1.1.1.x.xx.xx - Pessoal a Pagar - 13º Salário (P)\n
+        Crédito: 2.1.1.1.x.xx.xx  - Pessoal a Pagar – 13º Salário (F)
+        """)
+                st.info("IMPORTANTE: Troca de Atributo do ISF de 'P' para 'F'.")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.1.xx.xx - Crédito Disponível\n  
+        Crédito: 6.2.2.1.3.01.xx - Crédito Empenhado a Liquidar\n
+        Débito: 6.2.2.1.3.01.xx - Crédito Empenhado a Liquidar\n  
+        Crédito: 6.2.2.1.3.02.xx - Crédito Empenhado em Liquidação
+        """)
+                st.info("IMPORTANTE: Figura do 'Em Liquidação'.")
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.1.xx.xx - Disponibilidade por Destinação de Recursos (DDR)\n  
+        Crédito: 8.2.1.1.2.xx.xx - DDR Comprometida por Empenho
+        """)
+                st.markdown("---")
+                st.markdown("**3º LIQUIDAÇÃO nos meses do pagamento:**")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.3.02.xx - Crédito Empenhado em Liquidação\n  
+        Crédito: 6.2.2.1.3.03.xx - Crédito Empenhado Liquidado a Pagar
+        """)
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.2.xx.xx - DDR Comprometida por Empenho\n  
+        Crédito: 8.2.1.1.3.xx.xx - DDR Comprometida por Liquidação e Entradas Compensatórias
+        """)
+                st.markdown("---")
+                st.markdown("**4º PAGAMENTO nos meses do pagamento:**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito:  2.1.1.1.x.xx.xx - Pessoal a Pagar – 13º Salário (F)\n
+        Crédito:  1.1.1.1.1.xx.xx  - Caixa e Equivalentes de Caixa em Moeda Nacional (F) 
+        """)
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.3.03.xx - Crédito Empenhado Liquidado a Pagar\n  
+        Crédito: 6.2.2.1.3.04.xx - Crédito Empenhado Pago
+        """)
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.3.xx.xx - DDR Comprometida por Liquidação e Entradas Compensatórias\n  
+        Crédito: 8.2.1.1.4.xx.xx - DDR Utilizada
+        """)
+                
+
+            elif evento == "Apropriação da VPD após a liquidação":
+                st.markdown("### Apropriação da VPD após a liquidação")
+                st.markdown("**1º EMPENHO:**")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.1.xx.xx - Crédito Disponível\n  
+        Crédito: 6.2.2.1.3.01.xx - Crédito Empenhado a Liquidar
+        """)
+                st.info("O empenho não gera efeito patrimonial.")
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.1.xx.xx - Disponibilidade por Destinação de Recursos (DDR)\n  
+        Crédito: 8.2.1.1.2.xx.xx - DDR Comprometida por Empenho
+        """)
+                st.markdown("---")
+                st.markdown("**2º No momento do recebimento e incorporação ao estoque:**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito:  1.1.5.6.x.xx.xx - Estoque - Almoxarifado\n
+        Crédito: 2.1.3.x.x.xx.xx  - Fornecedores e Contas a Pagar a Curto Prazo (F)
+        """)
+                st.info("IMPORTANTE: Atributo do ISF já surge como 'F'.")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.3.01.xx - Crédito Empenhado a Liquidar\n  
+        Crédito: 6.2.2.1.3.02.xx - Crédito Empenhado em Liquidação
+        """)
+                st.info("IMPORTANTE: Figura do 'Em Liquidação'.")
+         
+                st.markdown("---")
+                st.markdown("**3º LIQUIDAÇÃO e incorporação ao estoque:**")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.3.02.xx - Crédito Empenhado em Liquidação\n  
+        Crédito: 6.2.2.1.3.03.xx - Crédito Empenhado Liquidado a Pagar
+        """)
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.2.xx.xx - DDR Comprometida por Empenho\n  
+        Crédito: 8.2.1.1.3.xx.xx - DDR Comprometida por Liquidação e Entradas Compensatórias
+        """)
+                st.markdown("---")
+                st.markdown("**4º PAGAMENTO nos meses do pagamento:**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito:  2.1.1.1.x.xx.xx - Pessoal a Pagar – 13º Salário (F)\n
+        Crédito:  1.1.1.1.1.xx.xx  - Caixa e Equivalentes de Caixa em Moeda Nacional (F) 
+        """)
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.3.03.xx - Crédito Empenhado Liquidado a Pagar\n  
+        Crédito: 6.2.2.1.3.04.xx - Crédito Empenhado Pago
+        """)
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.3.xx.xx - DDR Comprometida por Liquidação e Entradas Compensatórias\n  
+        Crédito: 8.2.1.1.4.xx.xx - DDR Utilizada
+        """)
+                st.markdown("---")
+                st.markdown("**5º momento da saída do estoque:**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito:   3.3.1.1.1.xx.xx - Consumo de Material – Consolidação\n
+        Crédito:  1.1.5.6.x.xx.xx - Estoque - Almoxarifado 
+        """)
+
+
 
             elif evento == "Aquisição de veículo":
 
@@ -1043,6 +1274,8 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
 
     ###############################################################
 
+    # SEÇÃO DOS RAZONETES
+
     CONTAS_FIXAS = [
             "Receita a Realizar Co",
             "Receita a Realizar Cap",
@@ -1098,32 +1331,33 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
 
         st.markdown("## Razão Contábil Interativo")
 
-        st.info(
-            "Os dados permanecem salvos durante a sessão do app. "
-            "Você também pode exportar em Excel e importar novamente depois."
+        st.warning(
+            "⚠️ **Atenção:** Os dados preenchidos nos razonetes ficam salvos apenas "
+            "durante a sessão atual do navegador. Para não perder o exercício, "
+            "**exporte o arquivo Excel antes de sair do app.**"
         )
 
-        # ==========================================
-        # IMPORTAÇÃO
-        # ==========================================
-        st.markdown("### Importar exercício salvo")
-        arquivo_importado = st.file_uploader(
-            "Selecione um arquivo .xlsx exportado anteriormente",
-            type=["xlsx"],
-            key="upload_razoes"
-        )
+        # # ==========================================
+        # # IMPORTAÇÃO
+        # # ==========================================
+        # st.markdown("### Importar exercício salvo")
+        # arquivo_importado = st.file_uploader(
+        #     "Selecione um arquivo .xlsx exportado anteriormente",
+        #     type=["xlsx"],
+        #     key="upload_razoes"
+        # )
 
-        if arquivo_importado is not None:
-            if st.button("Importar dados do Excel"):
-                razoes_importadas = importar_razoes_de_excel(arquivo_importado, CONTAS_FIXAS)
+        # if arquivo_importado is not None:
+        #     if st.button("Importar dados do Excel"):
+        #         razoes_importadas = importar_razoes_de_excel(arquivo_importado, CONTAS_FIXAS)
 
-                for conta in CONTAS_FIXAS:
-                    if conta in razoes_importadas:
-                        st.session_state.razoes[conta] = razoes_importadas[conta]
+        #         for conta in CONTAS_FIXAS:
+        #             if conta in razoes_importadas:
+        #                 st.session_state.razoes[conta] = razoes_importadas[conta]
 
-                st.success("Dados importados com sucesso.")
+        #         st.success("Dados importados com sucesso.")
 
-        st.divider()
+        # st.divider()
 
         # ==========================================
         # ESCOLHA DA CONTA
@@ -1168,18 +1402,63 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
 
         st.divider()
 
-        # ==========================================
-        # EXPORTAÇÃO
-        # ==========================================
-        st.markdown("### Exportar exercício")
-        arquivo_excel = exportar_razoes_para_excel(st.session_state.razoes)
+        st.markdown("### 💾 Salvar ou continuar exercício")
 
-        st.download_button(
-            label="Baixar razonetes em Excel",
-            data=arquivo_excel,
-            file_name="razoes_contabeis.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("#### 📥 Importar exercício")
+            
+            arquivo_importado = st.file_uploader(
+                "Selecionar arquivo Excel salvo anteriormente",
+                type=["xlsx"],
+                key="upload_razoes"
+            )
+
+            if arquivo_importado is not None:
+                if st.button("Importar dados"):
+                    razoes_importadas = importar_razoes_de_excel(arquivo_importado, CONTAS_FIXAS)
+
+                    for conta in CONTAS_FIXAS:
+                        if conta in razoes_importadas:
+                            st.session_state.razoes[conta] = razoes_importadas[conta]
+
+                    st.success("Dados importados com sucesso.")
+
+        with col2:
+            st.markdown("#### 📤 Exportar exercício")
+
+            arquivo_excel = exportar_razoes_para_excel(st.session_state.razoes)
+
+            st.download_button(
+                label="Baixar razonetes em Excel",
+                data=arquivo_excel,
+                file_name="razoes_contabeis.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                use_container_width=True
+            )
+
+        st.success(
+            "✔️ Terminou o exercício? "
+            "Clique em **Baixar razonetes em Excel** para salvar seu trabalho."
         )
+
+        if st.button("🔄 Reiniciar exercício"):
+            st.session_state.razoes = {}
+            st.rerun()
+
+        # # ==========================================
+        # # EXPORTAÇÃO
+        # # ==========================================
+        # st.markdown("### Exportar exercício")
+        # arquivo_excel = exportar_razoes_para_excel(st.session_state.razoes)
+
+        # st.download_button(
+        #     label="Baixar razonetes em Excel",
+        #     data=arquivo_excel,
+        #     file_name="razoes_contabeis.xlsx",
+        #     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        # )
 
         st.divider()
 

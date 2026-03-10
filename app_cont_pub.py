@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
+import re
 from core.estilos import titulo_app
 from core.estilos import aplicar_estilos 
 from core.funcoes import exportar_razoes_para_excel, importar_razoes_de_excel
@@ -1274,45 +1275,68 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
 
     ###############################################################
 
-    CONTAS_FIXAS = [
-            "Receita a Realizar Co",
-            "Receita a Realizar Cap",
-            "Previsão Inicial da Receita",
-            "Orçamento da Despesa",
-            "Crédito Disponível Co",
-            "Crédito Disponível Cap",
-            "Despesa ou Créditos Empenhados Co",
-            "Despesa ou Créditos Empenhados Cap",
-            "Despesa ou Créditos Liquidados Co",
-            "Despesa ou Créditos Liquidados Cap",
-            "Valores Pagos Co",
-            "Valores Pagos Cap",
-            "Receita Realizada Co",
-            "Receita Realizada Cap",
-            "Banco Conta Única",
-            "Variação Aumentativa: Receita Corrente",
-            "Variação Aumentativa: Transferência de Cap",
-            "Variação Diminutiva: Despesa Corrente",
-            "Receita a Receber",
-            "Depósito de Terceiros",
-            "Consignações",
-            "Pessoal a Pagar",
-            "Fornecedores",
-            "Obras em Andamento",
-            "Estoque de Materiais",
-            "Bens Móveis e Imóveis",
-            "Empréstimos Concedidos",
-            "Empréstimos Contraídos",
-            "Dívida Ativa",
-            "Restos a Pagar Processados",
-            "Variação Aumentativa Indep. Orçamento",
-            "Variação Diminutiva Indep. Orçamento",
-            "Dívida Fundada",
-            "Disponibilidade por Fonte Corrente",
-            "Disponibilidade por Fonte Capital",
-            "Disponibilidade Financeira"
-        ]
+    # SEÇÃO DOS RAZONETES
 
+    CONTAS_FIXAS = [
+
+    # ================================
+    # CONTAS ORÇAMENTÁRIAS
+    # ================================
+
+    "Previsão Inicial da Receita",
+    "Receita a Realizar Co",
+    "Receita a Realizar Cap",
+    "Receita Realizada Co",
+    "Receita Realizada Cap",
+
+    "Orçamento da Despesa",
+    "Crédito Disponível Co",
+    "Crédito Disponível Cap",
+    "Despesa ou Créditos Empenhados Co",
+    "Despesa ou Créditos Empenhados Cap",
+    "Despesa ou Créditos Liquidados Co",
+    "Despesa ou Créditos Liquidados Cap",
+    "Valores Pagos Co",
+    "Valores Pagos Cap",
+
+    # ================================
+    # CONTAS PATRIMONIAIS
+    # ================================
+
+    "Banco Conta Única",
+    "Receita a Receber",
+    "Dívida Ativa",
+
+    "Estoque de Materiais",
+    "Obras em Andamento",
+    "Bens Móveis e Imóveis",
+
+    "Depósito de Terceiros",
+    "Consignações",
+    "Pessoal a Pagar",
+    "Fornecedores",
+    "Restos a Pagar Processados",
+
+    "Empréstimos Concedidos",
+    "Empréstimos Contraídos",
+    "Dívida Fundada",
+
+    "Variação Aumentativa: Receita Corrente",
+    "Variação Aumentativa: Transferência de Cap",
+    "Variação Aumentativa Indep. Orçamento",
+
+    "Variação Diminutiva: Despesa Corrente",
+    "Variação Diminutiva Indep. Orçamento",
+
+    # ================================
+    # CONTAS DE CONTROLE / COMPENSAÇÃO
+    # ================================
+
+    "Disponibilidade por Fonte Corrente",
+    "Disponibilidade por Fonte Capital",
+    "Disponibilidade Financeira"
+
+    ]
 
     if "razoes" not in st.session_state:
         st.session_state.razoes = {}
@@ -1329,36 +1353,31 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
 
         st.markdown("## Razão Contábil Interativo")
 
-        st.info(
-            "Os dados permanecem salvos durante a sessão do app. "
-            "Você também pode exportar em Excel e importar novamente depois."
+        st.warning(
+            "⚠️ **Atenção:** Os dados preenchidos nos razonetes ficam salvos apenas "
+            "durante a sessão atual do navegador. Para não perder o exercício, "
+            "**exporte o arquivo Excel dos Razonetes do exercício antes de sair do app.**"
         )
 
-        # ==========================================
-        # IMPORTAÇÃO
-        # ==========================================
-        st.markdown("### Importar exercício salvo")
-        arquivo_importado = st.file_uploader(
-            "Selecione um arquivo .xlsx exportado anteriormente",
-            type=["xlsx"],
-            key="upload_razoes"
-        )
-
-        if arquivo_importado is not None:
-            if st.button("Importar dados do Excel"):
-                razoes_importadas = importar_razoes_de_excel(arquivo_importado, CONTAS_FIXAS)
-
-                for conta in CONTAS_FIXAS:
-                    if conta in razoes_importadas:
-                        st.session_state.razoes[conta] = razoes_importadas[conta]
-
-                st.success("Dados importados com sucesso.")
-
-        st.divider()
 
         # ==========================================
         # ESCOLHA DA CONTA
         # ==========================================
+        st.markdown(
+            """
+            <div class="light-box">
+
+            Sigas os passos abaixo para efetuar os registros nos razonetes
+            
+            <ul>
+                <li>1) Escolha abaixo a conta a ser preenchida no razonete (lógica das partidas dobradas)</li>
+                <li>2) Digite no quadro/tabela o respectivo valor a ser lançado na coluna de débito ou crédito</li>
+            </ul>
+            </div>
+            """,
+            unsafe_allow_html=True
+            )
+        
         conta_escolhida = st.selectbox(
             "Selecione a conta para preencher",
             CONTAS_FIXAS
@@ -1399,19 +1418,81 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
 
         st.divider()
 
-        # ==========================================
-        # EXPORTAÇÃO
-        # ==========================================
-        st.markdown("### Exportar exercício")
-        arquivo_excel = exportar_razoes_para_excel(st.session_state.razoes)
+        # # ==========================================
+        # # IMPORTAÇÃO E EXPORTAÇÃO
+        # # ==========================================
 
-        st.download_button(
-            label="Baixar razonetes em Excel",
-            data=arquivo_excel,
-            file_name="razoes_contabeis.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        st.markdown("### 💾 Importar Razonte anterior ou Exportar Razonete do atual exercício")
+
+        st.markdown("""
+        <div class="light-box">
+        <p>
+        Nesta área é possível <b>salvar o razonete do exercício realizado</b> ou <b>continuar um trabalho iniciado anteriormente e importar os razonetes</b>.
+        <br><br>
+        • Utilize <b>Exportar razonetes</b> para baixar os razonetes do seu exercício em Excel e guardar seu trabalho.<br>
+        • Utilize <b>Importar exercício</b> para carregar um arquivo de razonetes salvo anteriormente e continuar os lançamentos.
+        </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("#### 📥 Importar Razontes de exercício anteriormente feito")
+            
+            arquivo_importado = st.file_uploader(
+                "Selecionar arquivo Excel salvo anteriormente",
+                type=["xlsx"],
+                key="upload_razoes"
+            )
+
+            if arquivo_importado is not None:
+                if st.button("Importar dados"):
+                    razoes_importadas = importar_razoes_de_excel(arquivo_importado, CONTAS_FIXAS)
+
+                    for conta in CONTAS_FIXAS:
+                        if conta in razoes_importadas:
+                            st.session_state.razoes[conta] = razoes_importadas[conta]
+
+                    st.success("Dados importados com sucesso.")
+
+        with col2:
+            st.markdown("#### 📤 Exportar Razonetes do exercício")
+
+            nome_arquivo = st.text_input(
+                "Nome do arquivo",
+                value="razoes_contabeis",
+                key="nome_arquivo_exportacao"
+            ).strip()
+
+            if nome_arquivo == "":
+                nome_arquivo = "razoes_contabeis"
+
+            nome_arquivo = re.sub(r'[<>:"/\\|?*]', "_", nome_arquivo)
+
+            if not nome_arquivo.lower().endswith(".xlsx"):
+                nome_arquivo = f"{nome_arquivo}.xlsx"
+
+            arquivo_excel = exportar_razoes_para_excel(st.session_state.razoes)
+
+            st.download_button(
+                label="Baixar razonetes em Excel",
+                data=arquivo_excel,
+                file_name=nome_arquivo,
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                use_container_width=True
+            )
+
+        st.success(
+            "✔️ Terminou o exercício? "
+            "Clique em **Baixar razonetes em Excel** para salvar seu trabalho."
         )
 
+        if st.button("🔄 Reiniciar (limpar) Razonetes do exercício"):
+            st.session_state.razoes = {}
+            st.rerun()
+
+    
         st.divider()
 
         # ==========================================
