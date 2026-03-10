@@ -58,7 +58,7 @@ st.markdown(
         border-radius: 12px;
         padding: 16px 18px;
         margin-bottom: 12px;
-        background-color: #092056FF;
+        background-color: #484549FF;
         color: green;
     }
     .box h4 {
@@ -80,14 +80,14 @@ st.markdown(
         border-radius: 12px;
         padding: 16px 18px;
         margin-bottom: 12px;
-        background-color: #092056FF;
+        background-color: #410657FF;
     }
     .flow-box {
         border: 1px dashed #9db3e0;
         border-radius: 12px;
         padding: 14px 16px;
         margin-bottom: 12px;
-        background-color: #092056FF;
+        background-color: #410657FF;
         font-weight: 600;
         text-align: center;
     }
@@ -107,7 +107,7 @@ st.markdown(
 SECOES = {
     "Home": {
         "titulo": "Contabilidade Pública",
-        "subtitulo": "App de apoio para o semestre completo, estruturado conforme o sumário do material do professor."
+        "subtitulo": "App de apoio para a disciplina de Contabilidade Pública."
     },
     "Programa da Disciplina": {
         "titulo": "1. Programa da Disciplina",
@@ -314,7 +314,7 @@ if pagina == "Home":
                 <p>1. Programa da disciplina</p>
                 <p>2. Contabilidade aplicada ao Setor Público</p>
                 <p>3. Plano de Contas e Subsistemas</p>
-                <p>4. Registro das operações típicas conforme as NBC T SP 16</p>
+                <p>4. Registro das operações típicas conforme as NBC TSP e MCASP</p>
                 <p>5. Exercícios e Cases</p>
                 <p>6. Elaboração das Demonstrações Contábeis</p>
                 <p>7. Exercícios e Cases</p>
@@ -327,9 +327,9 @@ if pagina == "Home":
         st.markdown(
             """
             <div class="box">
-                <h4>Como usar em sala</h4>
-                <p>• Seguir o material do professor como eixo principal</p>
-                <p>• Usar os blocos do app como roteiro de exposição</p>
+                <h4>Didática</h4>
+                <p>• Seguir o material didático como eixo principal</p>
+                <p>• Usar o app como roteiro de exposição</p>
                 <p>• Explorar os exercícios ao final de cada parte</p>
                 <p>• Retomar os conceitos centrais antes das avaliações</p>
             </div>
@@ -372,6 +372,7 @@ elif pagina in [
     "Elaboração das Demonstrações Contábeis"
 ]:
     sec = SECOES[pagina]
+    st.divider()
     st.markdown(f'<div class="section-title">{sec["titulo"]}</div>', unsafe_allow_html=True)
 
     c1, c2 = st.columns([1.1, 0.9])
@@ -404,8 +405,8 @@ elif pagina in [
         #     """,
         #     unsafe_allow_html=True
         # )
-
-    st.markdown('<div class="section-title">Explicações centrais</div>', unsafe_allow_html=True)
+    st.divider()
+    st.markdown('<div class="section-title"></div>', unsafe_allow_html=True)
     cols = st.columns(2)
     for i, (titulo, texto) in enumerate(sec["explicacao"]):
         with cols[i % 2]:
@@ -521,8 +522,222 @@ elif pagina in [
 
         st.table(df)
 
-##################################################################################################################
 
+##################################################################################################################
+    if pagina == "Plano de Contas e Subsistemas":
+        ##################################################################################################################
+        # Seção: Plano de Contas e Subsistemas
+        st.divider()
+        # st.markdown(
+        # '<div class="section-title">Plano de Contas e Subsistemas</div>',
+        # unsafe_allow_html=True
+        # )
+
+        st.markdown(
+        """
+        Para que a contabilidade forneça informações úteis aos seus usuários, é necessário registrar adequadamente os **atos e fatos administrativos**.  
+        Esses registros são realizados por meio das **contas contábeis**, que representam conjuntos de transações de natureza semelhante.
+
+        As contas funcionam como o principal instrumento de **memória das informações quantitativas da entidade**.
+        """
+        )
+
+        st.markdown(
+        """
+        <div class="light-box">
+        <h4>Exemplo</h4>
+        <p>
+        Receber dinheiro e pagar uma dívida são operações diferentes, mas ambas envolvem recursos financeiros.  
+        Essas transações são registradas em contas representativas dessa natureza, como <b>Caixa</b> ou <b>Tesouraria</b>.
+        </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+        )
+
+        st.divider()
+
+        # Plano de contas
+
+        st.markdown(
+        '<div class="section-title">Plano de Contas</div>',
+        unsafe_allow_html=True
+        )
+
+        st.markdown(
+        """
+        O **Plano de Contas** é uma relação lógica e ordenada de todas as contas que podem ser utilizadas por uma entidade.
+
+        Ele possui três elementos fundamentais:
+
+        • **Elenco**: relação de todas as contas utilizadas pela instituição, com seus respectivos códigos e título.
+
+        • **Função**: indica a finalidade de cada conta dentro do sistema contábil (descrição da conta).
+
+        • **Funcionamento**: demonstra como cada conta é movimentada a débito e a crédito.
+        """
+        )
+
+
+        st.divider()
+
+        # Estrutura do PCASP
+
+        st.markdown(
+        '<div class="section-title">Estrutura do PCASP</div>',
+        unsafe_allow_html=True
+        )
+
+        st.markdown(
+        """
+        Na contabilidade pública brasileira utiliza-se o **Plano de Contas Aplicado ao Setor Público (PCASP)**, organizado em classes numeradas de **1 a 8**.
+        """
+        )
+
+
+        dados_pcasp = {
+        "Classe": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+        ],
+
+        "Descrição": [
+        "Ativo",
+        "Passivo e Patrimônio Líquido",
+        "Variações Patrimoniais Diminutivas",
+        "Variações Patrimoniais Aumentativas",
+        "Controles da Aprovação do Planejamento e Orçamento",
+        "Controles da Execução do Planejamento e Orçamento",
+        "Controles Devedores",
+        "Controles Credores"
+        ]
+        }
+
+        c1, c2 = st.columns([1.1, 0.9])
+
+        with c1:
+            df_pcasp = pd.DataFrame(dados_pcasp)
+            st.dataframe(df_pcasp, hide_index=True, use_container_width=True)
+        with c2:
+            st.markdown(
+            """
+            <div class="light-box">
+            As contas são estruturadas em <b>níveis de desdobramento</b>, partindo do nível mais sintético para o mais analítico, de forma a atender diferentes necessidades de informação.
+            </div>
+            """,
+            unsafe_allow_html=True
+            )
+
+            st.markdown(
+            """
+            <div class="light-box">
+            <b>NATUREZA DAS CONTAS:<br><br>
+            </b> No PCASP, a natureza das contas pode ser identificada pela numeração da classe:<br><br>
+            • Contas iniciadas por número **ímpar** → natureza **devedora**<br><br>  
+            • Contas iniciadas por número **par** → natureza **credora**
+            </div>
+            """,
+            unsafe_allow_html=True
+            )
+
+        st.divider()
+
+        # Classificação das contas
+
+        st.markdown(
+        '<div class="section-title">Classificação das Contas</div>',
+        unsafe_allow_html=True
+        )
+
+        dados_class = {
+        "Critério": [
+        "Natureza do saldo",
+        "Utilização",
+        "Movimentação",
+        "Extensão"
+        ],
+
+        "Classificações": [
+        "Estáveis ou instáveis",
+        "Estáticas ou dinâmicas",
+        "Unilaterais ou bilaterais",
+        "Sintéticas ou analíticas"
+        ]
+        }
+
+        c1, c2 = st.columns([1.1, 0.9])
+
+        with c1:
+            df_class = pd.DataFrame(dados_class)
+            st.dataframe(df_class, hide_index=True, use_container_width=True)
+            
+        with c2:
+            st.markdown(
+            """
+            <div class="light-box">
+            <b>Contas sintéticas</b> representam contas de nível mais agregado.  
+            <b>Contas analíticas</b> representam o detalhamento das contas sintéticas, podendo chegar ao nível de <b>conta corrente</b>.
+            </div>
+            """,
+            unsafe_allow_html=True
+            )
+
+        st.divider()
+
+        # Subsistemas de contas
+
+        st.markdown(
+        '<div class="section-title">Subsistemas de Contas</div>',
+        unsafe_allow_html=True
+        )
+
+        st.markdown(
+        """
+        A **Lei 4.320/64** e as **NBC TSP** determinam que os registros contábeis no setor público sejam organizados em **subsistemas independentes, porém integrados**.
+        """
+        )
+
+        dados_subsistemas = {
+        "Subsistema": [
+        "Orçamentário",
+        "Patrimonial",
+        "Compensação"
+        ],
+
+        "Descrição": [
+        "Registra os atos de natureza orçamentária relacionados à previsão da receita e à fixação e execução da despesa.",
+        "Registra ingressos e dispêndios de recursos, bem como ativos, passivos e variações patrimoniais.",
+        "Controla atos administrativos que não alteram imediatamente o patrimônio, mas podem afetá-lo no futuro."
+        ]
+        }
+
+        c1, c2 = st.columns([1.6, 0.4])
+
+        with c1:
+            df_sub = pd.DataFrame(dados_subsistemas)
+            st.dataframe(df_sub, hide_index=True, use_container_width=True)
+            
+        with c2:
+            st.markdown(
+            """
+            <div class="light-box">
+            Exemplos de registros no sistema de compensação incluem:
+            <ul>
+                <li>contratos / convênios</li>
+                <li>garantias / cauções / fianças</li>
+                <li>disponib. financ. por fonte</li>
+                <li>demais controles</li>
+            </ul>
+            </div>
+            """,
+            unsafe_allow_html=True
+            )
 
 
 ##################################################################################################################
