@@ -55,7 +55,26 @@ def aplicar_estilos():
             border-radius: 12px;
             padding: 16px 18px;
             margin-bottom: 12px;
-            background-color: #410657FF;
+            background-color: #484549FF;
+        }
+                
+        .light-box h4 {
+            color: white;
+        }
+
+        .light-box p, .light-box li {
+            color: white;
+        }
+                
+        .light-box a {
+            color: #F4840BFF;  /* laranja */
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .light-box a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
         }
 
         .flow-box {
@@ -63,9 +82,13 @@ def aplicar_estilos():
             border-radius: 12px;
             padding: 14px 16px;
             margin-bottom: 12px;
-            background-color: #410657FF;
+            background-color: #484549FF;
             font-weight: 600;
             text-align: center;
+        }
+                
+        .flow-box p, .flow-box span {
+            color: white;
         }
 
         /* wrapper do botão */
@@ -87,7 +110,7 @@ def aplicar_estilos():
             border-radius: 12px;
             font-weight: 700;
             border: 1px solid #374151;
-            background-color: #0f172a;
+            background-color: #7310A8FF;
             color: white;
             transition: all 0.2s ease;
         }

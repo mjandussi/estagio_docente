@@ -110,7 +110,7 @@ SECOES = {
             ("Finalidade", "Registrar, controlar e evidenciar os atos e fatos da gestão pública."),
             ("Abrangência", "Acompanha orçamento, execução financeira, patrimônio e suas variações."),
             ("Campo de aplicação", "É aplica aos quatro níveis de governo: Federal, Estadual, Municipal, Distrito Federal, aos três Poderes constituídos, bem como as suas autarquias e fundações."),
-            ("Normas", "A disciplina se apoia na Lei 4.320/64, nas NBC T SP / NBC TSP e no MCASP.")
+            ("Normas", "A disciplina se apoia na Lei 4.320/64, nas NBC TSP e no MCASP.")
         ],
         "fala": "Nesta seção, continuamos a mostar a lógica do orçamento, mas avançando para a evidenciação patrimonial."
     },
@@ -307,6 +307,19 @@ elif pagina == "Programa da Disciplina":
         st.markdown('<div class="box"><h4>1.6 Bibliografia recomendada</h4>' + "".join([f"<p>• {x}</p>" for x in sec["bibliografia"]]) + '</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="box"><h4>1.7 Curriculum resumido do professor</h4><p>{sec["curriculum"]}</p></div>', unsafe_allow_html=True)
 
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+
 # =========================
 # BLOCOS TEÓRICOS
 # =========================
@@ -341,15 +354,6 @@ elif pagina in [
             unsafe_allow_html=True
         )
 
-        # st.markdown(
-        #     f"""
-        #     <div class="box">
-        #         <h4>Observação</h4>
-        #         <p>{sec["fala"]}</p>
-        #     </div>
-        #     """,
-        #     unsafe_allow_html=True
-        # )
     st.divider()
     st.markdown('<div class="section-title"></div>', unsafe_allow_html=True)
     cols = st.columns(2)
@@ -366,6 +370,19 @@ elif pagina in [
             )
 
 ##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+
 # Seção específica para Contabilidade Aplicada ao Setor Público
     if pagina == "Contabilidade Aplicada ao Setor Público":
         st.divider()
@@ -466,16 +483,24 @@ elif pagina in [
         df_dif_entre_conts = pd.DataFrame(dados)
         st.dataframe(df_dif_entre_conts, hide_index=True, use_container_width=True)
 
-
 ##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+
     if pagina == "Plano de Contas e Subsistemas":
         ##################################################################################################################
         # Seção: Plano de Contas e Subsistemas
         st.divider()
-        # st.markdown(
-        # '<div class="section-title">Plano de Contas e Subsistemas</div>',
-        # unsafe_allow_html=True
-        # )
 
         st.markdown(
         """
@@ -491,8 +516,7 @@ elif pagina in [
         <div class="light-box">
         <h4>Exemplo</h4>
         <p>
-        Receber dinheiro e pagar uma dívida são operações diferentes, mas ambas envolvem recursos financeiros.  
-        Essas transações são registradas em contas representativas dessa natureza, como <b>Caixa</b> ou <b>Tesouraria</b>.
+        Aas operações de recebimento de recursos financeiros e de pagamento de obrigações correspondem a transações distintas do ponto de vista administrativo. Contudo, ambas envolvem movimentações relacionadas ao dinheiro disponível da entidade. Para registrar essas operações de forma organizada, utiliza-se uma conta específica que representa esse elemento patrimonial, usualmente denominada Caixa ou Tesouraria.
         </p>
         </div>
         """,
@@ -572,6 +596,7 @@ elif pagina in [
             st.markdown(
             """
             <div class="light-box">
+
             As contas são estruturadas em <b>níveis de desdobramento</b>, partindo do nível mais sintético para o mais analítico, de forma a atender diferentes necessidades de informação.
             </div>
             """,
@@ -581,9 +606,10 @@ elif pagina in [
             st.markdown(
             """
             <div class="light-box">
+
             <b>NATUREZA DAS CONTAS:<br><br>
             </b> No PCASP, a natureza das contas pode ser identificada pela numeração da classe:<br><br>
-            • Contas iniciadas por número **ímpar** → natureza **devedora**<br><br>  
+            • Contas iniciadas por número **ímpar** → natureza **devedora**<br> 
             • Contas iniciadas por número **par** → natureza **credora**
             </div>
             """,
@@ -625,6 +651,7 @@ elif pagina in [
             st.markdown(
             """
             <div class="light-box">
+
             <b>Contas sintéticas</b> representam contas de nível mais agregado.  
             <b>Contas analíticas</b> representam o detalhamento das contas sintéticas, podendo chegar ao nível de <b>conta corrente</b>.
             </div>
@@ -651,7 +678,7 @@ elif pagina in [
         "Subsistema": [
         "Orçamentário",
         "Patrimonial",
-        "Compensação"
+        "Controle"
         ],
 
         "Descrição": [
@@ -671,7 +698,9 @@ elif pagina in [
             st.markdown(
             """
             <div class="light-box">
+
             Exemplos de registros no sistema de compensação incluem:
+
             <ul>
                 <li>contratos / convênios</li>
                 <li>garantias / cauções / fianças</li>
@@ -682,6 +711,50 @@ elif pagina in [
             """,
             unsafe_allow_html=True
             )
+
+        st.divider()
+        st.markdown('<div class="section-title">PCASP - Detalhamento do Código da Conta Contábil</div>', unsafe_allow_html=True)
+
+        img_col1, img_col2 = st.columns(2)
+
+        with img_col1:
+            st.image(
+                "imagens/mcasp_desdobramento_niveis_pcasp.png",  # imagem da página do Detalhamento dos Níveis das Contas do PCASP
+                caption="PCASP - Níveis de desdobramento",
+                use_container_width=True
+            )
+            # st.markdown(
+            #     """
+            #     <div class="light-box">
+            #         <h4>Link de acesso</h4>
+            #         <p><a href="https://siconfi.tesouro.gov.br/siconfi/pages/public/conteudo/conteudo.jsf?id=12503" target="_blank">
+            #         Acessar página do Anexo II da Portaria STN 642, de 20 de Setembro de 2019 (Leiaute MSC)
+            #         </a></p>
+            #     </div>
+            #     """,
+            #     unsafe_allow_html=True
+            # )
+
+            st.markdown(
+                """
+                <div class="light-box">
+                    <h4>Link de acesso</h4>
+                    <p><a href="https://www.tesourotransparente.gov.br/publicacoes/manual-de-contabilidade-aplicada-ao-setor-publico-mcasp/2025/26" target="_blank">
+                    Acessar página do MCASP
+                    </a></p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with img_col2:
+            st.image(
+                "imagens/mcasp_niveis_de_consolidacao_pcasp.png",  # imagem da página dos Níveis de Consolidação (OFSS) do PCASP
+                caption="PCASP - Níveis de Consolidação (OFSS)",
+                use_container_width=True
+            )
+
+        st.divider()
 
 
 ##################################################################################################################
@@ -699,7 +772,7 @@ elif pagina in [
 
 
     if pagina == "Registro das Operações Típicas":
-        st.markdown('<div class="section-title">Fluxos essenciais</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title">Fases (Estágios) da Receita e Despesa</div>', unsafe_allow_html=True)
         st.code("Receita: Previsão -> Lançamento -> Arrecadação -> Recolhimento", language=None)
         st.code("Despesa: Dotação -> Empenho -> Liquidação -> Pagamento", language=None)
 
@@ -762,12 +835,10 @@ elif pagina in [
 
         st.markdown(
         """
-        <div class="light-box">
         <b>Arrecadação de receitas públicas</b>
+        <div class="light-box">
 
         Exemplo: recebimento de tributos.
-
-        Registro conceitual:
 
         Débito – Caixa ou Bancos  
         Crédito – Receita Tributária
@@ -778,12 +849,10 @@ elif pagina in [
 
         st.markdown(
         """
-        <div class="light-box">
         <b>Execução da despesa pública</b>
-
+        <div class="light-box">
+        
         Exemplo: pagamento de fornecedores.
-
-        Registro conceitual:
 
         Débito – Despesa  
         Crédito – Caixa ou Obrigações a Pagar
@@ -794,12 +863,10 @@ elif pagina in [
 
         st.markdown(
         """
-        <div class="light-box">
         <b>Aquisição de bens ou serviços</b>
-
+        <div class="light-box">
+        
         Exemplo: compra de equipamentos para a administração pública.
-
-        Registro patrimonial:
 
         Débito – Ativo Imobilizado  
         Crédito – Caixa ou Fornecedores
