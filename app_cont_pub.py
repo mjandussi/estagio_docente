@@ -1,8 +1,10 @@
 
 import streamlit as st
 import pandas as pd
+from io import BytesIO
 from core.estilos import titulo_app
 from core.estilos import aplicar_estilos 
+from core.funcoes import exportar_razoes_para_excel, importar_razoes_de_excel
 
 
 # Usuário e senha
@@ -1036,32 +1038,105 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
             with st.expander(pergunta):
                 st.success(resposta)
 
-    # with c2:
-    #     st.markdown('<div class="section-title">Questões para discussão</div>', unsafe_allow_html=True)
-    #     for i, (pergunta, resposta) in enumerate(sec["questoes"], start=1):
-    #         with st.expander(f"Questão {i}"):
-    #             st.write(pergunta)
-    #             st.success(resposta)
     
     st.divider()
 
     ###############################################################
 
-    if pagina == "Exercícios e Cases I":
+    CONTAS_FIXAS = [
+            "Receita a Realizar Co",
+            "Receita a Realizar Cap",
+            "Previsão Inicial da Receita",
+            "Orçamento da Despesa",
+            "Crédito Disponível Co",
+            "Crédito Disponível Cap",
+            "Despesa ou Créditos Empenhados Co",
+            "Despesa ou Créditos Empenhados Cap",
+            "Despesa ou Créditos Liquidados Co",
+            "Despesa ou Créditos Liquidados Cap",
+            "Valores Pagos Co",
+            "Valores Pagos Cap",
+            "Receita Realizada Co",
+            "Receita Realizada Cap",
+            "Banco Conta Única",
+            "Variação Aumentativa: Receita Corrente",
+            "Variação Aumentativa: Transferência de Cap",
+            "Variação Diminutiva: Despesa Corrente",
+            "Receita a Receber",
+            "Depósito de Terceiros",
+            "Consignações",
+            "Pessoal a Pagar",
+            "Fornecedores",
+            "Obras em Andamento",
+            "Estoque de Materiais",
+            "Bens Móveis e Imóveis",
+            "Empréstimos Concedidos",
+            "Empréstimos Contraídos",
+            "Dívida Ativa",
+            "Restos a Pagar Processados",
+            "Variação Aumentativa Indep. Orçamento",
+            "Variação Diminutiva Indep. Orçamento",
+            "Dívida Fundada",
+            "Disponibilidade por Fonte Corrente",
+            "Disponibilidade por Fonte Capital",
+            "Disponibilidade Financeira"
+        ]
 
+
+    if "razoes" not in st.session_state:
+        st.session_state.razoes = {}
+
+    for conta in CONTAS_FIXAS:
+        if conta not in st.session_state.razoes:
+            st.session_state.razoes[conta] = pd.DataFrame({
+                "Histórico": ["", "", "", ""],
+                "Débito": [0.0, 0.0, 0.0, 0.0],
+                "Crédito": [0.0, 0.0, 0.0, 0.0]
+            })
+
+    if pagina == "Exercícios e Cases I":
 
         st.markdown("## Razão Contábil Interativo")
 
-        conta = st.text_input("Nome da conta", value="Caixa")
+        st.info(
+            "Os dados permanecem salvos durante a sessão do app. "
+            "Você também pode exportar em Excel e importar novamente depois."
+        )
 
-        df_razao = pd.DataFrame({
-            "Histórico": ["", "", "", ""],
-            "Débito": [0.0, 0.0, 0.0, 0.0],
-            "Crédito": [0.0, 0.0, 0.0, 0.0]
-        })
+        # ==========================================
+        # IMPORTAÇÃO
+        # ==========================================
+        st.markdown("### Importar exercício salvo")
+        arquivo_importado = st.file_uploader(
+            "Selecione um arquivo .xlsx exportado anteriormente",
+            type=["xlsx"],
+            key="upload_razoes"
+        )
+
+        if arquivo_importado is not None:
+            if st.button("Importar dados do Excel"):
+                razoes_importadas = importar_razoes_de_excel(arquivo_importado, CONTAS_FIXAS)
+
+                for conta in CONTAS_FIXAS:
+                    if conta in razoes_importadas:
+                        st.session_state.razoes[conta] = razoes_importadas[conta]
+
+                st.success("Dados importados com sucesso.")
+
+        st.divider()
+
+        # ==========================================
+        # ESCOLHA DA CONTA
+        # ==========================================
+        conta_escolhida = st.selectbox(
+            "Selecione a conta para preencher",
+            CONTAS_FIXAS
+        )
+
+        df_conta = st.session_state.razoes[conta_escolhida]
 
         razao_edit = st.data_editor(
-            df_razao,
+            df_conta,
             hide_index=True,
             use_container_width=True,
             num_rows="dynamic",
@@ -1070,14 +1145,17 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
                 "Débito": st.column_config.NumberColumn("Débito", format="%.2f", width="small"),
                 "Crédito": st.column_config.NumberColumn("Crédito", format="%.2f", width="small")
             },
-            key="razao_editor"
+            key=f"razao_editor_{conta_escolhida}"
         )
 
-        total_debito = razao_edit["Débito"].fillna(0).sum()
-        total_credito = razao_edit["Crédito"].fillna(0).sum()
+        # salva no estado
+        st.session_state.razoes[conta_escolhida] = razao_edit
+
+        total_debito = pd.to_numeric(razao_edit["Débito"], errors="coerce").fillna(0).sum()
+        total_credito = pd.to_numeric(razao_edit["Crédito"], errors="coerce").fillna(0).sum()
         saldo = total_debito - total_credito
 
-        st.markdown(f"### Conta: {conta}")
+        st.markdown(f"### Conta: {conta_escolhida}")
 
         c1, c2, c3 = st.columns(3)
         with c1:
@@ -1089,6 +1167,60 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
             st.metric("Saldo", f"R$ {abs(saldo):,.2f} ({natureza})")
 
         st.divider()
+
+        # ==========================================
+        # EXPORTAÇÃO
+        # ==========================================
+        st.markdown("### Exportar exercício")
+        arquivo_excel = exportar_razoes_para_excel(st.session_state.razoes)
+
+        st.download_button(
+            label="Baixar razonetes em Excel",
+            data=arquivo_excel,
+            file_name="razoes_contabeis.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+
+        st.divider()
+
+        # ==========================================
+        # RESUMO GERAL
+        # ==========================================
+        st.markdown("## Resumo dos saldos de todas as contas")
+
+        resumo = []
+        for conta, df in st.session_state.razoes.items():
+            deb = pd.to_numeric(df["Débito"], errors="coerce").fillna(0).sum()
+            cred = pd.to_numeric(df["Crédito"], errors="coerce").fillna(0).sum()
+            saldo = deb - cred
+
+            resumo.append({
+                "Conta": conta,
+                "Total Débito": deb,
+                "Total Crédito": cred,
+                "Saldo": abs(saldo),
+                "Natureza do Saldo": "Devedor" if saldo >= 0 else "Credor"
+            })
+
+        df_resumo = pd.DataFrame(resumo)
+
+        st.dataframe(
+            df_resumo,
+            hide_index=True,
+            use_container_width=True,
+            column_config={
+                "Conta": st.column_config.Column(width="large"),
+                "Total Débito": st.column_config.NumberColumn(format="%.2f"),
+                "Total Crédito": st.column_config.NumberColumn(format="%.2f"),
+                "Saldo": st.column_config.NumberColumn(format="%.2f"),
+                "Natureza do Saldo": st.column_config.Column(width="small")
+            }
+        )
+
+        st.divider()
+
+
+        #############################################################
 
         st.markdown("## Balanço Patrimonial Interativo")
 
