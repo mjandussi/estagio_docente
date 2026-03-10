@@ -164,11 +164,35 @@ SECOES = {
             ("Qual a sequência correta dos estágios da receita?", "Previsão, lançamento, arrecadação e recolhimento."),
             ("Qual a sequência correta dos estágios da despesa?", "Empenho, liquidação e pagamento.")
         ],
-        "case": [
-            "Receita prevista de IPTU e sua arrecadação ao longo do exercício.",
-            "Despesa com pessoal empenhada, liquidada e paga.",
-            "Aquisição de bem permanente com efeito qualitativo no patrimônio."
-        ]
+        # "case": [
+        #     "Receita prevista de IPTU e sua arrecadação ao longo do exercício.",
+        #     "Despesa com pessoal empenhada, liquidada e paga.",
+        #     "Aquisição de bem permanente com efeito qualitativo no patrimônio."
+        # ]
+        "fatos_janeiro": [
+        "0) Lançamento inicial de constituição do ente fictício no valor de R$ 2.000.000,00 contra as contas de Banco e Saldo Patrimonial.",
+        "1) O orçamento anual foi fixado em R$ 2.000.000,00, em equilíbrio entre receitas e despesas.",
+        "2) Houve empenho para pagamento da folha de pessoal no valor correspondente a 1/12 do custo anual de R$ 1.200.000,00.",
+        "3) Houve a liquidação da folha de pessoal, com retenção de contribuição previdenciária de 11%.",
+        "4) Houve o pagamento líquido da folha aos servidores.",
+        "5) Houve lançamento de receita tributária no valor de R$ 180.000,00.",
+        "6) Houve arrecadação e recolhimento de 80% da receita tributária lançada e estes valores foram para o Tesouro.",
+        "7) Houve compra de material de consumo para estoque no valor de R$ 10.000,00, e com a liquidação e pagamento apenas no valor de R$ 5.000,00.",
+        "8) Houve obtenção de Empréstimo e Financiamento no valor de R$ 100.000,00",
+        "9) Houve inscrição de Dívida Ativa dos valores não arrecadados de receita tributária"
+        ],
+        "fatos_dezembro": [
+        "10) Houve arrecadação sobre um convênio firmado para copra de ambulância e o valor recebido foi de R$ 50.000,00.",
+        "11) Houve compra de 1 ambulância no valor de R$40.000,00 (empenho e liquidação).",
+        "12) Houve a depreciação de 1 mês da ambulância adquirida.",
+        "13) Houve pagamento (repasse) de toda contribuição previdenciária retida",
+        "14) Houve inscrição de Dívida Ativa dos valores não arrecadados de receita tributária",
+        "15) Houve doação recebida de computadores no valor de $3.000.",
+        "16) Consumo de metade do Estoque atualizado",
+        "17) Aumento do saldo de empréstimos contraídos em $2000 devido a variação cambial",
+        "18) Houve a inscrição dos valores de Restos a Pagar Processados",
+        "19) Houve a inscrição dos valores de Restos a Pagar Processados"
+        ],
     },
     "Elaboração das Demonstrações Contábeis": {
         "titulo": "2. Elaboração das Demonstrações Contábeis",
@@ -1251,9 +1275,22 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
             """,
             unsafe_allow_html=True
         )
+        
+    with c2:
+        st.markdown('<div class="section-title">Questões para discussão</div>', unsafe_allow_html=True)
 
-        st.markdown('<div class="section-title">Cases sugeridos</div>', unsafe_allow_html=True)
-        for item in sec["case"]:
+        for pergunta, resposta in sec["questoes"]:
+            with st.expander(pergunta):
+                st.success(resposta)
+
+
+    st.divider()
+    
+    c3, c4 = st.columns([1.05, 0.95])
+
+    with c3:
+        st.markdown('<div class="section-title">Atos e Fatos Janeiro</div>', unsafe_allow_html=True)
+        for item in sec["fatos_janeiro"]:
             st.markdown(
                 f"""
                 <div class="light-box">
@@ -1263,12 +1300,18 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
                 unsafe_allow_html=True
             )
 
-    with c2:
-        st.markdown('<div class="section-title">Questões para discussão</div>', unsafe_allow_html=True)
-
-        for pergunta, resposta in sec["questoes"]:
-            with st.expander(pergunta):
-                st.success(resposta)
+    with c4:
+        st.markdown('<div class="section-title">Atos e Fatos Dezembro</div>', unsafe_allow_html=True)
+        for item in sec["fatos_dezembro"]:
+            st.markdown(
+                f"""
+                <div class="light-box">
+                    <p>{item}</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+    
 
     
     st.divider()
@@ -1368,7 +1411,7 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
             <div class="light-box">
 
             Sigas os passos abaixo para efetuar os registros nos razonetes
-            
+
             <ul>
                 <li>1) Escolha abaixo a conta a ser preenchida no razonete (lógica das partidas dobradas)</li>
                 <li>2) Digite no quadro/tabela o respectivo valor a ser lançado na coluna de débito ou crédito</li>
@@ -1378,6 +1421,7 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
             unsafe_allow_html=True
             )
         
+                    
         conta_escolhida = st.selectbox(
             "Selecione a conta para preencher",
             CONTAS_FIXAS
@@ -1425,15 +1469,17 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
         st.markdown("### 💾 Importar Razonte anterior ou Exportar Razonete do atual exercício")
 
         st.markdown("""
-        <div class="light-box">
-        <p>
-        Nesta área é possível <b>salvar o razonete do exercício realizado</b> ou <b>continuar um trabalho iniciado anteriormente e importar os razonetes</b>.
-        <br><br>
-        • Utilize <b>Exportar razonetes</b> para baixar os razonetes do seu exercício em Excel e guardar seu trabalho.<br>
-        • Utilize <b>Importar exercício</b> para carregar um arquivo de razonetes salvo anteriormente e continuar os lançamentos.
-        </p>
-        </div>
-        """, unsafe_allow_html=True)
+            <div class="light-box">
+            <p>
+            📌 <b>Nesta área é possível <b>salvar o razonete do exercício realizado</b> ou <b>continuar um trabalho iniciado anteriormente e importar os razonetes</b><br><br>
+
+            📥 <b>Importar exercício</b> → para carregar um arquivo de razonetes salvo anteriormente e continuar os lançamentos.<br>
+            📤 <b>Exportar razonetes</b> → para baixar os razonetes do seu exercício em Excel e guardar seu trabalho.<br><br>
+
+            ⚠️ Os dados ficam disponíveis apenas durante a sessão do navegador. Para não perder o trabalho, exporte o arquivo ao final do exercício.
+            </p>
+            </div>
+            """, unsafe_allow_html=True)
 
         col1, col2 = st.columns(2)
 
