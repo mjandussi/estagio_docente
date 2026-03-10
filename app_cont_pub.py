@@ -747,6 +747,154 @@ elif pagina in [
         st.code("Receita: Previsão -> Lançamento -> Arrecadação -> Recolhimento", language=None)
         st.code("Despesa: Dotação -> Empenho -> Liquidação -> Pagamento", language=None)
 
+        st.divider()
+        st.markdown(
+        """
+        ### Registros das operações típicas conforme a NBC TSP – Estrutura Conceitual
+
+        A contabilidade aplicada ao setor público tem como objetivo fornecer informações úteis para a prestação de contas (accountability) e para a tomada de decisões dos usuários das informações contábeis.
+
+        Nesse contexto, os registros contábeis devem representar adequadamente os fenômenos econômicos que afetam o patrimônio das entidades públicas.
+        """
+        )
+
+        st.markdown(
+        """
+        De acordo com a **NBC TSP – Estrutura Conceitual**, as informações contábeis devem refletir fielmente os eventos econômicos ocorridos, sendo elaboradas com base no **regime de competência**.
+
+        Assim, os efeitos das transações devem ser reconhecidos **no período em que ocorrem**, independentemente do recebimento ou pagamento de caixa.
+        """
+        )
+
+        st.markdown(
+        """
+        No setor público, muitas operações ocorrem por meio de **transações sem contraprestação**, como:
+
+        • arrecadação de tributos  
+        • transferências governamentais  
+        • contribuições obrigatórias  
+
+        Nessas situações, a entidade recebe ou entrega recursos **sem troca direta de valor equivalente**, característica típica da atuação governamental.
+        """
+        )
+
+        st.markdown('<div class="section-title">Reconhecimento dos Elementos Contábeis</div>', unsafe_allow_html=True)
+
+        st.markdown(
+        """
+        A Estrutura Conceitual define os principais elementos das demonstrações contábeis:
+        """
+        )
+
+        st.markdown(
+        """
+        <div class="light-box">
+        <b>Ativo</b><br>
+        Recurso controlado pela entidade pública no presente, resultante de eventos passados, do qual se espera obter benefícios econômicos ou potencial de serviços.
+
+        <br><br>
+
+        <b>Passivo</b><br>
+        Obrigação presente decorrente de eventos passados, cuja liquidação resultará na saída de recursos.
+
+        <br><br>
+
+        <b>Receita</b><br>
+        Aumentos no patrimônio líquido durante o período que não decorrem de contribuições dos proprietários.
+
+        <br><br>
+
+        <b>Despesa</b><br>
+        Reduções no patrimônio líquido resultantes do consumo de ativos ou do surgimento de obrigações.
+        </div>
+        """,
+        unsafe_allow_html=True
+        )
+
+        st.markdown('<div class="section-title">Fluxos essenciais</div>', unsafe_allow_html=True)
+
+        st.code("Receita: Previsão -> Lançamento -> Arrecadação -> Recolhimento", language=None)
+
+        st.code("Despesa: Dotação -> Empenho -> Liquidação -> Pagamento", language=None)
+
+        st.markdown('<div class="section-title">Exemplos de registros contábeis</div>', unsafe_allow_html=True)
+
+        st.markdown(
+        """
+        <div class="light-box">
+        <b>Arrecadação de receitas públicas</b>
+
+        Exemplo: recebimento de tributos.
+
+        Registro conceitual:
+
+        Débito – Caixa ou Bancos  
+        Crédito – Receita Tributária
+        </div>
+        """,
+        unsafe_allow_html=True
+        )
+
+        st.markdown(
+        """
+        <div class="light-box">
+        <b>Execução da despesa pública</b>
+
+        Exemplo: pagamento de fornecedores.
+
+        Registro conceitual:
+
+        Débito – Despesa  
+        Crédito – Caixa ou Obrigações a Pagar
+        </div>
+        """,
+        unsafe_allow_html=True
+        )
+
+        st.markdown(
+        """
+        <div class="light-box">
+        <b>Aquisição de bens ou serviços</b>
+
+        Exemplo: compra de equipamentos para a administração pública.
+
+        Registro patrimonial:
+
+        Débito – Ativo Imobilizado  
+        Crédito – Caixa ou Fornecedores
+        </div>
+        """,
+        unsafe_allow_html=True
+        )
+
+        st.markdown('<div class="section-title">Características qualitativas da informação contábil</div>', unsafe_allow_html=True)
+
+        st.markdown(
+        """
+        As informações contábeis devem possuir características que garantam sua utilidade para os usuários:
+
+        • **Relevância** – capacidade de influenciar decisões  
+        • **Representação fidedigna** – refletir adequadamente a realidade econômica  
+        • **Compreensibilidade** – permitir entendimento pelos usuários  
+        • **Comparabilidade** – possibilitar análise entre períodos e entidades  
+        • **Tempestividade** – disponibilização em tempo adequado
+        """
+        )
+
+        st.markdown('<div class="section-title">Relação com a prestação de contas</div>', unsafe_allow_html=True)
+
+        st.markdown(
+        """
+        A contabilidade pública desempenha papel fundamental no processo de **accountability**, permitindo que a sociedade e os órgãos de controle avaliem:
+
+        • a utilização dos recursos públicos  
+        • a eficiência das políticas públicas  
+        • a sustentabilidade das finanças governamentais
+
+        O registro adequado das operações garante **transparência, controle e suporte à tomada de decisões**.
+        """
+        )
+
 # =========================
 # EXERCÍCIOS E CASES
 # =========================
