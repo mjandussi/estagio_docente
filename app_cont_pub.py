@@ -831,51 +831,51 @@ elif pagina in [
 
         st.divider()
 
-        st.markdown('<div class="section-title">Exemplos de registros contábeis</div>', unsafe_allow_html=True)
+        # st.markdown('<div class="section-title">Exemplos de registros contábeis</div>', unsafe_allow_html=True)
 
-        st.markdown(
-        """
-        <b>Arrecadação de receitas públicas</b>
-        <div class="light-box">
+        # st.markdown(
+        # """
+        # <b>Arrecadação de receitas públicas</b>
+        # <div class="light-box">
 
-        Exemplo: recebimento de tributos.
+        # Exemplo: recebimento de tributos.
 
-        Débito – Caixa ou Bancos  
-        Crédito – Receita Tributária
-        </div>
-        """,
-        unsafe_allow_html=True
-        )
+        # Débito – Caixa ou Bancos  
+        # Crédito – Receita Tributária
+        # </div>
+        # """,
+        # unsafe_allow_html=True
+        # )
 
-        st.markdown(
-        """
-        <b>Execução da despesa pública</b>
-        <div class="light-box">
+        # st.markdown(
+        # """
+        # <b>Execução da despesa pública</b>
+        # <div class="light-box">
         
-        Exemplo: pagamento de fornecedores.
+        # Exemplo: pagamento de fornecedores.
 
-        Débito – Despesa  
-        Crédito – Caixa ou Obrigações a Pagar
-        </div>
-        """,
-        unsafe_allow_html=True
-        )
+        # Débito – Despesa  
+        # Crédito – Caixa ou Obrigações a Pagar
+        # </div>
+        # """,
+        # unsafe_allow_html=True
+        # )
 
-        st.markdown(
-        """
-        <b>Aquisição de bens ou serviços</b>
-        <div class="light-box">
+        # st.markdown(
+        # """
+        # <b>Aquisição de bens ou serviços</b>
+        # <div class="light-box">
         
-        Exemplo: compra de equipamentos para a administração pública.
+        # Exemplo: compra de equipamentos para a administração pública.
 
-        Débito – Ativo Imobilizado  
-        Crédito – Caixa ou Fornecedores
-        </div>
-        """,
-        unsafe_allow_html=True
-        )
+        # Débito – Ativo Imobilizado  
+        # Crédito – Caixa ou Fornecedores
+        # </div>
+        # """,
+        # unsafe_allow_html=True
+        # )
 
-        st.divider()
+        # st.divider()
 
 
         st.markdown('<div class="section-title">Características qualitativas da informação contábil</div>', unsafe_allow_html=True)
@@ -926,10 +926,13 @@ elif pagina in [
         evento = st.selectbox(
             "Escolha o evento contábil",
             [
-                "Arrecadação de tributo",
+                "Arrecadação E Recolhimento de tributo não lançado",
+                "Arrecadação E Recolhimento de tributo lançado",
                 "Empenho da despesa",
                 "Liquidação da despesa",
                 "Pagamento da despesa",
+                "Apropriação da VPD antes da liquidação",
+                "Apropriação da VPD após a liquidação",
                 "Aquisição de veículo",
                 "Depreciação de bem público",
                 "Inscrição em restos a pagar",
@@ -941,69 +944,230 @@ elif pagina in [
 
         if mostrar:
 
-            if evento == "Arrecadação de tributo":
-
-                st.markdown("### Arrecadação de tributo")
-
+            if evento == "Arrecadação E Recolhimento de tributo não lançado":
+                st.markdown("### Arrecadação E Recolhimento de tributo não lançado")
                 st.markdown("**Registro Patrimonial**")
-
                 st.success("""
-        Débito: Caixa ou Bancos  
-        Crédito: Receita Tributária (VPA)
+        Débito: 1.1.1.1.x.xx.xx - Caixa e Equivalentes de Caixa em Moeda Nacional (F)\n  
+        Crédito: 4.1.X.X.x.xx.xx - Receita Tributária (VPA)
+        """)
+                st.info("Efeito: aumento do patrimônio líquido.")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.1.1.x.xx.xx - Receita a Realizar (Corrente ou Capital)\n  
+        Crédito: 6.2.1.2.x.xx.xx - Receita Realizada (Corrente ou Capital)
+        """)
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 7.2.1.1.x.xx.xx - Controle da Disponibilidade de Recursos\n
+        Crédito: 8.2.1.1.1.xx.xx - Disponibilidade por Destinação de Recursos (DDR)
+        """)
+                
+            elif evento == "Arrecadação E Recolhimento de tributo lançado":
+                st.markdown("### Arrecadação E Recolhimento de tributo lançado")
+                st.markdown("**1º Momento (fato gerador):**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito: 1.1.2.1.x.xx.xx  - Créditos Tributários a Receber (P)\n  
+        Crédito: 4.1.X.X.x.xx.xx - Receita Tributária (VPA)
+        """)
+                st.info("Efeito: aumento do patrimônio líquido.")
+                st.markdown("---")
+                st.markdown("**2º Momento (Arrecadação e Recolhimento):**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito: 1.1.1.1.x.xx.xx - Caixa e Equivalentes de Caixa em Moeda Nacional (F)\n
+        Crédito: 1.1.2.1.x.xx.xx  - Créditos Tributários a Receber (P)
+        """)
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.1.1.x.xx.xx - Receita a Realizar (Corrente ou Capital)\n  
+        Crédito: 6.2.1.2.x.xx.xx - Receita Realizada (Corrente ou Capital)
+        """)
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 7.2.1.1.x.xx.xx - Controle da Disponibilidade de Recursos\n
+        Crédito: 8.2.1.1.1.xx.xx - Disponibilidade por Destinação de Recursos (DDR)
         """)
 
-                st.info("Efeito: aumento do patrimônio líquido.")
 
             elif evento == "Empenho da despesa":
-
                 st.markdown("### Empenho da despesa")
-
                 st.markdown("**Registro Orçamentário**")
-
                 st.success("""
-        Débito: Dotação Orçamentária Disponível  
-        Crédito: Crédito Empenhado a Liquidar
+        Débito: 6.2.2.1.1.xx.xx - Crédito Disponível\n  
+        Crédito: 6.2.2.1.3.01.xx - Crédito Empenhado a Liquidar
+        """)
+                st.info("O empenho não gera efeito patrimonial.")
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.1.xx.xx - Disponibilidade por Destinação de Recursos (DDR)\n  
+        Crédito: 8.2.1.1.2.xx.xx - DDR Comprometida por Empenho
         """)
 
-                st.info("O empenho não gera efeito patrimonial.")
 
             elif evento == "Liquidação da despesa":
-
                 st.markdown("### Liquidação da despesa")
-
-                st.markdown("**Registro Orçamentário**")
-
+                st.markdown("**Registro Patrimonial**")
                 st.success("""
-        Débito: Crédito Empenhado a Liquidar  
+        Débito:  3.3.2.x.x.xx.xx - Variação Patrimonial Diminutiva – Serviços (VPD)\n  
+        Crédito: 2.1.3.x.x.xx.xx - Fornecedores e Contas a Pagar a Curto Prazo (F)
+        """)
+                st.info("Aqui ocorre a variação patrimonial diminutiva.")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: Crédito Empenhado a Liquidar\n  
         Crédito: Crédito Empenhado Liquidado
         """)
-
-                st.markdown("**Registro Patrimonial**")
-
+                st.markdown("**Registro Controle**")
                 st.success("""
-        Débito: Despesa (VPD)  
-        Crédito: Obrigações a Pagar
+        Débito: 8.2.1.1.2.xx.xx - DDR Comprometida por Empenho\n  
+        Crédito: 8.2.1.1.3.xx.xx - DDR Comprometida por Liquidação e Entradas Compensatórias
         """)
 
-                st.info("Aqui ocorre a variação patrimonial diminutiva.")
 
             elif evento == "Pagamento da despesa":
-
                 st.markdown("### Pagamento da despesa")
-
                 st.markdown("**Registro Orçamentário**")
-
                 st.success("""
         Débito: Crédito Empenhado Liquidado  
         Crédito: Crédito Empenhado Pago
         """)
-
                 st.markdown("**Registro Patrimonial**")
-
                 st.success("""
         Débito: Obrigações a Pagar  
         Crédito: Caixa ou Bancos
         """)
+                
+
+            elif evento == "Apropriação da VPD antes da liquidação":
+                st.markdown("### Apropriação da VPD antes da liquidação")
+                st.markdown("**1º Apropriação mensal (1/12 do 13º salário):**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito: 3.1.1.x.x.xx.xx  - Remuneração a Pessoal\n  
+        Crédito: 2.1.1.1.x.xx.xx - Pessoal a Pagar - 13º Salário (P)
+        """)
+                st.info("Efeito: diminuição do patrimônio líquido.")
+                st.markdown("---")
+                st.markdown("**2º EMPENHO nos meses do pagamento:**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito:  2.1.1.1.x.xx.xx - Pessoal a Pagar - 13º Salário (P)\n
+        Crédito: 2.1.1.1.x.xx.xx  - Pessoal a Pagar – 13º Salário (F)
+        """)
+                st.info("IMPORTANTE: Troca de Atributo do ISF de 'P' para 'F'.")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.1.xx.xx - Crédito Disponível\n  
+        Crédito: 6.2.2.1.3.01.xx - Crédito Empenhado a Liquidar\n
+        Débito: 6.2.2.1.3.01.xx - Crédito Empenhado a Liquidar\n  
+        Crédito: 6.2.2.1.3.02.xx - Crédito Empenhado em Liquidação
+        """)
+                st.info("IMPORTANTE: Figura do 'Em Liquidação'.")
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.1.xx.xx - Disponibilidade por Destinação de Recursos (DDR)\n  
+        Crédito: 8.2.1.1.2.xx.xx - DDR Comprometida por Empenho
+        """)
+                st.markdown("---")
+                st.markdown("**3º LIQUIDAÇÃO nos meses do pagamento:**")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.3.02.xx - Crédito Empenhado em Liquidação\n  
+        Crédito: 6.2.2.1.3.03.xx - Crédito Empenhado Liquidado a Pagar
+        """)
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.2.xx.xx - DDR Comprometida por Empenho\n  
+        Crédito: 8.2.1.1.3.xx.xx - DDR Comprometida por Liquidação e Entradas Compensatórias
+        """)
+                st.markdown("---")
+                st.markdown("**4º PAGAMENTO nos meses do pagamento:**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito:  2.1.1.1.x.xx.xx - Pessoal a Pagar – 13º Salário (F)\n
+        Crédito:  1.1.1.1.1.xx.xx  - Caixa e Equivalentes de Caixa em Moeda Nacional (F) 
+        """)
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.3.03.xx - Crédito Empenhado Liquidado a Pagar\n  
+        Crédito: 6.2.2.1.3.04.xx - Crédito Empenhado Pago
+        """)
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.3.xx.xx - DDR Comprometida por Liquidação e Entradas Compensatórias\n  
+        Crédito: 8.2.1.1.4.xx.xx - DDR Utilizada
+        """)
+                
+
+            elif evento == "Apropriação da VPD após a liquidação":
+                st.markdown("### Apropriação da VPD após a liquidação")
+                st.markdown("**1º EMPENHO:**")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.1.xx.xx - Crédito Disponível\n  
+        Crédito: 6.2.2.1.3.01.xx - Crédito Empenhado a Liquidar
+        """)
+                st.info("O empenho não gera efeito patrimonial.")
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.1.xx.xx - Disponibilidade por Destinação de Recursos (DDR)\n  
+        Crédito: 8.2.1.1.2.xx.xx - DDR Comprometida por Empenho
+        """)
+                st.markdown("---")
+                st.markdown("**2º No momento do recebimento e incorporação ao estoque:**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito:  1.1.5.6.x.xx.xx - Estoque - Almoxarifado\n
+        Crédito: 2.1.3.x.x.xx.xx  - Fornecedores e Contas a Pagar a Curto Prazo (F)
+        """)
+                st.info("IMPORTANTE: Atributo do ISF já surge como 'F'.")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.3.01.xx - Crédito Empenhado a Liquidar\n  
+        Crédito: 6.2.2.1.3.02.xx - Crédito Empenhado em Liquidação
+        """)
+                st.info("IMPORTANTE: Figura do 'Em Liquidação'.")
+         
+                st.markdown("---")
+                st.markdown("**3º LIQUIDAÇÃO e incorporação ao estoque:**")
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.3.02.xx - Crédito Empenhado em Liquidação\n  
+        Crédito: 6.2.2.1.3.03.xx - Crédito Empenhado Liquidado a Pagar
+        """)
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.2.xx.xx - DDR Comprometida por Empenho\n  
+        Crédito: 8.2.1.1.3.xx.xx - DDR Comprometida por Liquidação e Entradas Compensatórias
+        """)
+                st.markdown("---")
+                st.markdown("**4º PAGAMENTO nos meses do pagamento:**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito:  2.1.1.1.x.xx.xx - Pessoal a Pagar – 13º Salário (F)\n
+        Crédito:  1.1.1.1.1.xx.xx  - Caixa e Equivalentes de Caixa em Moeda Nacional (F) 
+        """)
+                st.markdown("**Registro Orçamentário**")
+                st.success("""
+        Débito: 6.2.2.1.3.03.xx - Crédito Empenhado Liquidado a Pagar\n  
+        Crédito: 6.2.2.1.3.04.xx - Crédito Empenhado Pago
+        """)
+                st.markdown("**Registro Controle**")
+                st.success("""
+        Débito: 8.2.1.1.3.xx.xx - DDR Comprometida por Liquidação e Entradas Compensatórias\n  
+        Crédito: 8.2.1.1.4.xx.xx - DDR Utilizada
+        """)
+                st.markdown("---")
+                st.markdown("**5º momento da saída do estoque:**")
+                st.markdown("**Registro Patrimonial**")
+                st.success("""
+        Débito:   3.3.1.1.1.xx.xx - Consumo de Material – Consolidação\n
+        Crédito:  1.1.5.6.x.xx.xx - Estoque - Almoxarifado 
+        """)
+
+
 
             elif evento == "Aquisição de veículo":
 
