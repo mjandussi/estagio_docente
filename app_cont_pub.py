@@ -1,8 +1,9 @@
 
 import streamlit as st
 import pandas as pd
+from core.estilos import titulo_app
+from core.estilos import aplicar_estilos 
 
-############################################################################################
 
 # Usuário e senha
 USUARIO = "ladeira"
@@ -30,76 +31,16 @@ if not st.session_state["logado"]:
 
 ############################################################################################
 
+
 st.set_page_config(
     page_title="Contabilidade Pública",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# =========================
-# ESTILO
-# =========================
-st.markdown(
-    """
-    <style>
-    .main {padding-top: 1rem;}
-    .title-main {
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin-bottom: 0.2rem;
-    }
-    .subtitle-main {
-        font-size: 1.05rem;
-        color: #444;
-        margin-bottom: 1.2rem;
-    }
-    .box {
-        border: 1px solid #d9d9d9;
-        border-radius: 12px;
-        padding: 16px 18px;
-        margin-bottom: 12px;
-        background-color: #484549FF;
-        color: green;
-    }
-    .box h4 {
-        margin-top: 0;
-        margin-bottom: 0.5rem;
-        color: white;
-    }
-    .box p, .box li {
-        color: white;
-    }
-    .section-title {
-        font-size: 1.45rem;
-        font-weight: 700;
-        margin-top: 0.8rem;
-        margin-bottom: 0.8rem;
-    }
-    .light-box {
-        border: 1px solid #d9d9d9;
-        border-radius: 12px;
-        padding: 16px 18px;
-        margin-bottom: 12px;
-        background-color: #410657FF;
-    }
-    .flow-box {
-        border: 1px dashed #9db3e0;
-        border-radius: 12px;
-        padding: 14px 16px;
-        margin-bottom: 12px;
-        background-color: #410657FF;
-        font-weight: 600;
-        text-align: center;
-    }
-    div[data-testid="stButton"] > button {
-        height: 3rem;
-        border-radius: 12px;
-        font-weight: 700;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+titulo_app()
+aplicar_estilos()
+
 
 # =========================
 # CONTEÚDO
@@ -263,15 +204,6 @@ SECOES = {
 }
 
 # =========================
-# CABEÇALHO
-# =========================
-st.markdown('<div class="title-main">Contabilidade Pública</div>', unsafe_allow_html=True)
-st.markdown(
-    '<div class="subtitle-main">App semestral estruturado conforme o sumário dos arquivos Word e pensado para apoio à apresentação em sala.</div>',
-    unsafe_allow_html=True
-)
-
-# =========================
 # BOTÕES SUPERIORES
 # =========================
 labels = [
@@ -291,12 +223,23 @@ if "pagina" not in st.session_state:
 for chunk_start in range(0, len(labels), 4):
     cols = st.columns(4)
     chunk = labels[chunk_start:chunk_start+4]
+
     for i, label in enumerate(chunk):
         with cols[i]:
-            if st.button(label, use_container_width=True):
+            ativo = st.session_state.pagina == label
+
+            # abre um wrapper com classe diferente se estiver ativo
+            classe = "menu-wrapper active" if ativo else "menu-wrapper"
+            st.markdown(f'<div class="{classe}">', unsafe_allow_html=True)
+
+            if st.button(label, use_container_width=True, key=f"btn_{label}"):
                 st.session_state.pagina = label
+                st.rerun()
+
+            st.markdown("</div>", unsafe_allow_html=True)
 
 pagina = st.session_state.pagina
+
 
 # =========================
 # HOME
@@ -518,9 +461,8 @@ elif pagina in [
             ]
         }
 
-        df = pd.DataFrame(dados)
-
-        st.table(df)
+        df_dif_entre_conts = pd.DataFrame(dados)
+        st.dataframe(df_dif_entre_conts, hide_index=True, use_container_width=True)
 
 
 ##################################################################################################################
@@ -741,6 +683,18 @@ elif pagina in [
 
 
 ##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+
 
     if pagina == "Registro das Operações Típicas":
         st.markdown('<div class="section-title">Fluxos essenciais</div>', unsafe_allow_html=True)
@@ -772,11 +726,11 @@ elif pagina in [
 
         • arrecadação de tributos  
         • transferências governamentais  
-        • contribuições obrigatórias  
 
         Nessas situações, a entidade recebe ou entrega recursos **sem troca direta de valor equivalente**, característica típica da atuação governamental.
         """
         )
+        st.divider()
 
         st.markdown('<div class="section-title">Reconhecimento dos Elementos Contábeis</div>', unsafe_allow_html=True)
 
@@ -789,33 +743,18 @@ elif pagina in [
         st.markdown(
         """
         <div class="light-box">
-        <b>Ativo</b><br>
-        Recurso controlado pela entidade pública no presente, resultante de eventos passados, do qual se espera obter benefícios econômicos ou potencial de serviços.
-
-        <br><br>
-
-        <b>Passivo</b><br>
-        Obrigação presente decorrente de eventos passados, cuja liquidação resultará na saída de recursos.
-
-        <br><br>
-
-        <b>Receita</b><br>
-        Aumentos no patrimônio líquido durante o período que não decorrem de contribuições dos proprietários.
-
-        <br><br>
-
-        <b>Despesa</b><br>
-        Reduções no patrimônio líquido resultantes do consumo de ativos ou do surgimento de obrigações.
-        </div>
+        <ul>
+                <li><b>Ativo</b> - Recurso controlado pela entidade pública no presente, resultante de eventos passados, do qual se espera obter benefícios econômicos ou potencial de serviços.</li>
+                <li><b>Passivo</b> - Obrigação presente decorrente de eventos passados, cuja liquidação resultará na saída de recursos.</li>
+                <li><b>Receita</b> - Aumentos no patrimônio líquido durante o período que não decorrem de contribuições dos proprietários.</li>
+                <li> <b>Despesa</b> - Reduções no patrimônio líquido resultantes do consumo de ativos ou do surgimento de obrigações.</li>
+                </ul>
+            </div>
         """,
         unsafe_allow_html=True
         )
 
-        st.markdown('<div class="section-title">Fluxos essenciais</div>', unsafe_allow_html=True)
-
-        st.code("Receita: Previsão -> Lançamento -> Arrecadação -> Recolhimento", language=None)
-
-        st.code("Despesa: Dotação -> Empenho -> Liquidação -> Pagamento", language=None)
+        st.divider()
 
         st.markdown('<div class="section-title">Exemplos de registros contábeis</div>', unsafe_allow_html=True)
 
@@ -867,33 +806,197 @@ elif pagina in [
         unsafe_allow_html=True
         )
 
+        st.divider()
+
+
         st.markdown('<div class="section-title">Características qualitativas da informação contábil</div>', unsafe_allow_html=True)
 
         st.markdown(
-        """
-        As informações contábeis devem possuir características que garantam sua utilidade para os usuários:
-
-        • **Relevância** – capacidade de influenciar decisões  
-        • **Representação fidedigna** – refletir adequadamente a realidade econômica  
-        • **Compreensibilidade** – permitir entendimento pelos usuários  
-        • **Comparabilidade** – possibilitar análise entre períodos e entidades  
-        • **Tempestividade** – disponibilização em tempo adequado
-        """
+            """
+            As informações contábeis devem possuir características que garantam sua utilidade para os usuários:
+            <div class="light-box">
+                <ul>
+                    <li><b>Relevância</b> – capacidade de influenciar decisões</li>
+                    <li><b>Representação fidedigna</b> – refletir adequadamente a realidade econômica</li>
+                    <li><b>Compreensibilidade</b> – permitir entendimento pelos usuários</li>
+                    <li><b>Comparabilidade</b> – possibilitar análise entre períodos e entidades</li>
+                    <li><b>Tempestividade</b> – disponibilização em tempo adequado</li>
+                </ul>
+            </div>
+            """,
+            unsafe_allow_html=True
         )
+
+        st.divider()
 
         st.markdown('<div class="section-title">Relação com a prestação de contas</div>', unsafe_allow_html=True)
 
         st.markdown(
-        """
-        A contabilidade pública desempenha papel fundamental no processo de **accountability**, permitindo que a sociedade e os órgãos de controle avaliem:
+            """
+            A contabilidade pública desempenha papel fundamental no processo de **accountability**, permitindo que a sociedade e os órgãos de controle avaliem:
 
-        • a utilização dos recursos públicos  
-        • a eficiência das políticas públicas  
-        • a sustentabilidade das finanças governamentais
+            <div class="light-box">
+                <ul>
+                    <li>a utilização dos recursos públicos</li>
+                    <li>a eficiência das políticas públicas</li>
+                    <li>a sustentabilidade das finanças governamentais</li>
+                </ul>
+            </div>
 
-        O registro adequado das operações garante **transparência, controle e suporte à tomada de decisões**.
-        """
+             O registro adequado das operações garante **transparência, controle e suporte à tomada de decisões**.
+            """,
+            unsafe_allow_html=True
         )
+
+        st.divider()
+
+        ############################################################
+
+        st.markdown("## Simulador de Lançamentos da Contabilidade Pública")
+
+        evento = st.selectbox(
+            "Escolha o evento contábil",
+            [
+                "Arrecadação de tributo",
+                "Empenho da despesa",
+                "Liquidação da despesa",
+                "Pagamento da despesa",
+                "Aquisição de veículo",
+                "Depreciação de bem público",
+                "Inscrição em restos a pagar",
+                "Cancelamento de restos a pagar"
+            ]
+        )
+
+        mostrar = st.button("Mostrar lançamento")
+
+        if mostrar:
+
+            if evento == "Arrecadação de tributo":
+
+                st.markdown("### Arrecadação de tributo")
+
+                st.markdown("**Registro Patrimonial**")
+
+                st.success("""
+        Débito: Caixa ou Bancos  
+        Crédito: Receita Tributária (VPA)
+        """)
+
+                st.info("Efeito: aumento do patrimônio líquido.")
+
+            elif evento == "Empenho da despesa":
+
+                st.markdown("### Empenho da despesa")
+
+                st.markdown("**Registro Orçamentário**")
+
+                st.success("""
+        Débito: Dotação Orçamentária Disponível  
+        Crédito: Crédito Empenhado a Liquidar
+        """)
+
+                st.info("O empenho não gera efeito patrimonial.")
+
+            elif evento == "Liquidação da despesa":
+
+                st.markdown("### Liquidação da despesa")
+
+                st.markdown("**Registro Orçamentário**")
+
+                st.success("""
+        Débito: Crédito Empenhado a Liquidar  
+        Crédito: Crédito Empenhado Liquidado
+        """)
+
+                st.markdown("**Registro Patrimonial**")
+
+                st.success("""
+        Débito: Despesa (VPD)  
+        Crédito: Obrigações a Pagar
+        """)
+
+                st.info("Aqui ocorre a variação patrimonial diminutiva.")
+
+            elif evento == "Pagamento da despesa":
+
+                st.markdown("### Pagamento da despesa")
+
+                st.markdown("**Registro Orçamentário**")
+
+                st.success("""
+        Débito: Crédito Empenhado Liquidado  
+        Crédito: Crédito Empenhado Pago
+        """)
+
+                st.markdown("**Registro Patrimonial**")
+
+                st.success("""
+        Débito: Obrigações a Pagar  
+        Crédito: Caixa ou Bancos
+        """)
+
+            elif evento == "Aquisição de veículo":
+
+                st.markdown("### Aquisição de veículo")
+
+                st.markdown("**Registro Patrimonial (modelo atual)**")
+
+                st.success("""
+        Débito: Imobilizado – Veículos  
+        Crédito: Fornecedores
+        """)
+
+                st.info("Reconhecimento do ativo imobilizado.")
+
+            elif evento == "Depreciação de bem público":
+
+                st.markdown("### Depreciação de bem público")
+
+                st.markdown("**Registro Patrimonial**")
+
+                st.success("""
+        Débito: VPD – Depreciação  
+        Crédito: Depreciação Acumulada
+        """)
+
+                st.info("Representa consumo do potencial de serviço do ativo.")
+
+            elif evento == "Inscrição em restos a pagar":
+
+                st.markdown("### Inscrição em Restos a Pagar")
+
+                st.markdown("**Registro Orçamentário**")
+
+                st.success("""
+        Débito: Crédito Empenhado Liquidado  
+        Crédito: Restos a Pagar
+        """)
+
+            elif evento == "Cancelamento de restos a pagar":
+
+                st.markdown("### Cancelamento de Restos a Pagar")
+
+                st.markdown("**Registro Orçamentário**")
+
+                st.success("""
+        Débito: Restos a Pagar  
+        Crédito: Crédito Disponível
+        """)
+
+
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
 
 # =========================
 # EXERCÍCIOS E CASES
@@ -928,7 +1031,120 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
 
     with c2:
         st.markdown('<div class="section-title">Questões para discussão</div>', unsafe_allow_html=True)
-        for i, (pergunta, resposta) in enumerate(sec["questoes"], start=1):
-            with st.expander(f"Questão {i}"):
-                st.write(pergunta)
+
+        for pergunta, resposta in sec["questoes"]:
+            with st.expander(pergunta):
                 st.success(resposta)
+
+    # with c2:
+    #     st.markdown('<div class="section-title">Questões para discussão</div>', unsafe_allow_html=True)
+    #     for i, (pergunta, resposta) in enumerate(sec["questoes"], start=1):
+    #         with st.expander(f"Questão {i}"):
+    #             st.write(pergunta)
+    #             st.success(resposta)
+    
+    st.divider()
+
+    ###############################################################
+
+    if pagina == "Exercícios e Cases I":
+
+
+        st.markdown("## Razão Contábil Interativo")
+
+        conta = st.text_input("Nome da conta", value="Caixa")
+
+        df_razao = pd.DataFrame({
+            "Histórico": ["", "", "", ""],
+            "Débito": [0.0, 0.0, 0.0, 0.0],
+            "Crédito": [0.0, 0.0, 0.0, 0.0]
+        })
+
+        razao_edit = st.data_editor(
+            df_razao,
+            hide_index=True,
+            use_container_width=True,
+            num_rows="dynamic",
+            column_config={
+                "Histórico": st.column_config.TextColumn("Histórico", width="medium"),
+                "Débito": st.column_config.NumberColumn("Débito", format="%.2f", width="small"),
+                "Crédito": st.column_config.NumberColumn("Crédito", format="%.2f", width="small")
+            },
+            key="razao_editor"
+        )
+
+        total_debito = razao_edit["Débito"].fillna(0).sum()
+        total_credito = razao_edit["Crédito"].fillna(0).sum()
+        saldo = total_debito - total_credito
+
+        st.markdown(f"### Conta: {conta}")
+
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            st.metric("Total Débito", f"R$ {total_debito:,.2f}")
+        with c2:
+            st.metric("Total Crédito", f"R$ {total_credito:,.2f}")
+        with c3:
+            natureza = "Devedor" if saldo >= 0 else "Credor"
+            st.metric("Saldo", f"R$ {abs(saldo):,.2f} ({natureza})")
+
+        st.divider()
+
+        st.markdown("## Balanço Patrimonial Interativo")
+
+        df_ativo = pd.DataFrame({
+            "Conta": ["Caixa", "Créditos a Receber", "Imobilizado"],
+            "Valor": [0.0, 0.0, 0.0]
+        })
+
+        df_passivo_pl = pd.DataFrame({
+            "Conta": ["Fornecedores", "Obrigações", "Patrimônio Líquido"],
+            "Valor": [0.0, 0.0, 0.0]
+        })
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("### Ativo")
+            ativo_edit = st.data_editor(
+                df_ativo,
+                hide_index=True,
+                use_container_width=True,
+                num_rows="dynamic",
+                column_config={
+                    "Conta": st.column_config.TextColumn("Conta", width="medium"),
+                    "Valor": st.column_config.NumberColumn("Valor", format="%.2f", width="small")
+                },
+                key="ativo_editor"
+            )
+
+        with col2:
+            st.markdown("### Passivo + Patrimônio Líquido")
+            passivo_edit = st.data_editor(
+                df_passivo_pl,
+                hide_index=True,
+                use_container_width=True,
+                num_rows="dynamic",
+                column_config={
+                    "Conta": st.column_config.TextColumn("Conta", width="medium"),
+                    "Valor": st.column_config.NumberColumn("Valor", format="%.2f", width="small")
+                },
+                key="passivo_editor"
+            )
+
+        total_ativo = ativo_edit["Valor"].fillna(0).sum()
+        total_passivo = passivo_edit["Valor"].fillna(0).sum()
+
+        st.markdown("### Totais")
+
+        c1, c2 = st.columns(2)
+        with c1:
+            st.metric("Total do Ativo", f"R$ {total_ativo:,.2f}")
+        with c2:
+            st.metric("Total do Passivo + PL", f"R$ {total_passivo:,.2f}")
+
+        if round(total_ativo, 2) == round(total_passivo, 2):
+            st.success("Balanço em equilíbrio: Ativo = Passivo + Patrimônio Líquido.")
+        else:
+            diferenca = total_ativo - total_passivo
+            st.warning(f"Balanço sem equilíbrio. Diferença: R$ {diferenca:,.2f}")
