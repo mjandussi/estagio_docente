@@ -921,10 +921,10 @@ elif pagina in [
 
         ############################################################
 
-        st.markdown("## Simulador de Lançamentos da Contabilidade Pública")
+        st.markdown("## Lançamentos Típicos da Contabilidade Aplicada ao Setor Público")
 
         evento = st.selectbox(
-            "Escolha o evento contábil",
+            "Escolha um Ato/Fato Contábil",
             [
                 "Arrecadação E Recolhimento de tributo não lançado",
                 "Arrecadação E Recolhimento de tributo lançado",

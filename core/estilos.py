@@ -24,30 +24,24 @@ def aplicar_estilos():
             margin-bottom: 1.2rem;
         }
 
+        .section-title {
+            font-size: 1.45rem;
+            font-weight: 700;
+            margin-top: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
         .box {
             border: 1px solid #d9d9d9;
             border-radius: 12px;
             padding: 16px 18px;
             margin-bottom: 12px;
             background-color: #484549FF;
-            color: green;
-        }
-
-        .box h4 {
-            margin-top: 0;
-            margin-bottom: 0.5rem;
             color: white;
         }
 
-        .box p, .box li {
-            color: white;
-        }
-
-        .section-title {
-            font-size: 1.45rem;
-            font-weight: 700;
-            margin-top: 0.8rem;
-            margin-bottom: 0.8rem;
+        .box * {
+            color: white !important;
         }
 
         .light-box {
@@ -56,25 +50,11 @@ def aplicar_estilos():
             padding: 16px 18px;
             margin-bottom: 12px;
             background-color: #484549FF;
-        }
-                
-        .light-box h4 {
             color: white;
         }
 
-        .light-box p, .light-box li {
-            color: white;
-        }
-                
-        .light-box a {
-            color: #F4840BFF;  /* laranja */
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .light-box a:hover {
-            color: #60a5fa;
-            text-decoration: underline;
+        .light-box * {
+            color: white !important;
         }
 
         .flow-box {
@@ -85,12 +65,13 @@ def aplicar_estilos():
             background-color: #484549FF;
             font-weight: 600;
             text-align: center;
-        }
-                
-        .flow-box p, .flow-box span {
             color: white;
         }
 
+        .flow-box * {
+            color: white !important;
+        }
+                
         /* wrapper do botão */
         .menu-wrapper {
             padding: 4px;
