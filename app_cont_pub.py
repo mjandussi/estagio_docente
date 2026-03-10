@@ -170,7 +170,7 @@ SECOES = {
         #     "Aquisição de bem permanente com efeito qualitativo no patrimônio."
         # ]
         "fatos_janeiro": [
-        "0) Lançamento inicial de constituição do ente fictício no valor de R$ 2.000.000,00 contra as contas de Banco e Saldo Patrimonial.",
+        "0) Lançamento inicial de constituição do ente fictício no valor de R$ 1.000.000,00 contra as contas de Banco e Saldo Patrimonial.",
         "1) O orçamento anual foi fixado em R$ 2.000.000,00, em equilíbrio entre receitas e despesas.",
         "2) Houve empenho para pagamento da folha de pessoal no valor correspondente a 1/12 do custo anual de R$ 1.200.000,00.",
         "3) Houve a liquidação da folha de pessoal, com retenção de contribuição previdenciária de 11%.",
@@ -1285,7 +1285,9 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
 
 
     st.divider()
-    
+
+    st.markdown("### ✍️ Com base nas informações abaixo, sobre os atos e fatos de um determinado ente no ano X26, lance e contabilize nos razonetes disponíveis por conta contábil:")
+
     c3, c4 = st.columns([1.05, 0.95])
 
     with c3:
@@ -1339,30 +1341,34 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
     "Despesa ou Créditos Empenhados Cap",
     "Despesa ou Créditos Liquidados Co",
     "Despesa ou Créditos Liquidados Cap",
-    "Valores Pagos Co",
-    "Valores Pagos Cap",
+    "Despesa ou Créditos Pagos Co",
+    "Despesa ou Créditos Pagos Cap",
+
+    "Inscrição de Restos a Pagar Não Processado",
+    "Inscrição de Restos a Pagar Processado",
 
     # ================================
     # CONTAS PATRIMONIAIS
     # ================================
 
     "Banco Conta Única",
-    "Receita a Receber",
-    "Dívida Ativa",
+    "Receita a Tributária a Receber",
+    "Dívida Ativa Tributária",
 
     "Estoque de Materiais",
     "Obras em Andamento",
-    "Bens Móveis e Imóveis",
+    "Bens Móveis",
+    "Bens Imóveis",
 
     "Depósito de Terceiros",
     "Consignações",
     "Pessoal a Pagar",
     "Fornecedores",
-    "Restos a Pagar Processados",
 
     "Empréstimos Concedidos",
     "Empréstimos Contraídos",
     "Dívida Fundada",
+    "Saldo Patrimonial",
 
     "Variação Aumentativa: Receita Corrente",
     "Variação Aumentativa: Transferência de Cap",
