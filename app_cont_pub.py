@@ -4,7 +4,7 @@ import pandas as pd
 from io import BytesIO
 import re
 from core.estilos import titulo_app
-from core.estilos import aplicar_estilos 
+from core.estilos import aplicar_estilos, render_timeline 
 from core.funcoes import exportar_razoes_para_excel, importar_razoes_de_excel
 
 
@@ -58,7 +58,7 @@ SECOES = {
         "ementa": [
             "Contabilidade aplicada ao setor público.",
             "Plano de contas e subsistemas.",
-            "Registro das operações típicas conforme as NBC T SP 16.",
+            "Registro das operações típicas conforme o MCASP.",
             "Elaboração das demonstrações contábeis.",
             "Exercícios e cases."
         ],
@@ -71,12 +71,12 @@ SECOES = {
             "Aplicar os conceitos por meio de exercícios e cases."
         ],
         "conteudo": [
-            "Contabilidade aplicada ao Setor Público",
+            "Contabilidade Aplicada ao Setor Público",
             "Plano de Contas e Subsistemas",
             "Registro das operações típicas conforme as NBC T SP 16",
-            "Exercícios e Cases",
+            "Exercícios e Cases - parte 1",
             "Elaboração das Demonstrações Contábeis",
-            "Exercícios e Cases"
+            "Exercícios e Cases - parte 2"
         ],
         "metodologia": [
             "Aulas expositivas com apoio visual.",
@@ -86,7 +86,7 @@ SECOES = {
         ],
         "bibliografia": [
             "Lei nº 4.320/1964",
-            "NBC T SP 16 / NBC TSP",
+            "NBC TSP EC",
             "MCASP",
             "Demais referências indicadas pelo professor no plano de ensino"
         ],
@@ -230,6 +230,19 @@ SECOES = {
     }
 }
 
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+
 # =========================
 # BOTÕES SUPERIORES
 # =========================
@@ -267,6 +280,19 @@ for chunk_start in range(0, len(labels), 4):
 
 pagina = st.session_state.pagina
 
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+
 
 # =========================
 # HOME
@@ -282,12 +308,12 @@ if pagina == "Home":
             <div class="box">
                 <h4>Estrutura do app</h4>
                 <p>1. Programa da disciplina</p>
-                <p>2. Contabilidade aplicada ao Setor Público</p>
+                <p>2. Contabilidade Aplicada ao Setor Público</p>
                 <p>3. Plano de Contas e Subsistemas</p>
                 <p>4. Registro das operações típicas conforme as NBC TSP e MCASP</p>
-                <p>5. Exercícios e Cases</p>
+                <p>5. Exercícios e Cases - parte 1</p>
                 <p>6. Elaboração das Demonstrações Contábeis</p>
-                <p>7. Exercícios e Cases</p>
+                <p>7. Exercícios e Cases - parte 2</p>
             </div>
             """,
             unsafe_allow_html=True
@@ -297,11 +323,11 @@ if pagina == "Home":
         st.markdown(
             """
             <div class="box">
-                <h4>Didática</h4>
-                <p>• Seguir o material didático como eixo principal</p>
+                <h4>Didática e Material</h4>
+                <p>• Material didático como eixo principal</p>
                 <p>• Usar o app como roteiro de exposição</p>
-                <p>• Explorar os exercícios ao final de cada parte</p>
-                <p>• Retomar os conceitos centrais antes das avaliações</p>
+                <p>• Exercícios ao final de cada parte</p>
+                <p>• Revisar os conceitos centrais antes das avaliações</p>
             </div>
             """,
             unsafe_allow_html=True
@@ -312,6 +338,21 @@ if pagina == "Home":
         '<div class="flow-box">Fundamentos da Contabilidade Pública -> Plano de Contas -> Registros das Operações -> Exercícios e Cases -> Demonstrações Contábeis -> Exercícios e Cases</div>',
         unsafe_allow_html=True
     )
+
+
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+
 
 # =========================
 # PROGRAMA DA DISCIPLINA
@@ -330,7 +371,22 @@ elif pagina == "Programa da Disciplina":
         st.markdown('<div class="box"><h4>1.5 Metodologia</h4>' + "".join([f"<p>• {x}</p>" for x in sec["metodologia"]]) + '</div>', unsafe_allow_html=True)
     with c2:
         st.markdown('<div class="box"><h4>1.6 Bibliografia recomendada</h4>' + "".join([f"<p>• {x}</p>" for x in sec["bibliografia"]]) + '</div>', unsafe_allow_html=True)
+        st.markdown(
+                """
+                <div class="light-box">
+                    <h4>Links para acesso as bibliografia recomendada</h4>
+                    <p><a href="https://cfc.org.br/tecnica/normas-brasileiras-de-contabilidade/nbc-tsp-do-setor-publico/" target="_blank">
+                    Acessar página das normas NBC TSP no CFC
+                    </a></p>
+                    <p><a href="https://www.tesourotransparente.gov.br/publicacoes/manual-de-contabilidade-aplicada-ao-setor-publico-mcasp/2025/26" target="_blank">
+                    Acessar página do MCASP
+                    </a></p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
         st.markdown(f'<div class="box"><h4>1.7 Curriculum resumido do professor</h4><p>{sec["curriculum"]}</p></div>', unsafe_allow_html=True)
+        
 
 ##################################################################################################################
 ##################################################################################################################
@@ -346,7 +402,7 @@ elif pagina == "Programa da Disciplina":
 ##################################################################################################################
 
 # =========================
-# BLOCOS TEÓRICOS
+# BLOCOS TEÓRICOS (comum as 4 páginas de Teoria)
 # =========================
 elif pagina in [
     "Contabilidade Aplicada ao Setor Público",
@@ -364,7 +420,7 @@ elif pagina in [
         st.markdown(
             f"""
             <div class="box">
-                <h4>Objetivo do bloco</h4>
+                <h4>Objetivo desta seção</h4>
                 <p>{sec["objetivo"]}</p>
             </div>
             """,
@@ -373,7 +429,7 @@ elif pagina in [
         
     with c2:
         st.markdown(
-            '<div class="box"><h4>Tópicos principais</h4>' +
+            '<div class="box"><h4>Principais tópicos que serão abordados</h4>' +
             "".join([f"<p>• {x}</p>" for x in sec["topicos"]]) +
             '</div>',
             unsafe_allow_html=True
@@ -408,10 +464,49 @@ elif pagina in [
 ##################################################################################################################
 ##################################################################################################################
 
+    #############################################
+    ########    CONTABILIDADE PÚBLICA    ########
+    #############################################
+
 # Seção específica para Contabilidade Aplicada ao Setor Público
+    st.divider()
     if pagina == "Contabilidade Aplicada ao Setor Público":
+        st.markdown(
+            '<div class="section-title">Evolução histórica e normativa da Contabilidade Aplicada ao Setor Público</div>',
+            unsafe_allow_html=True
+        )
+
+        st.markdown("""
+        A Contabilidade Aplicada ao Setor Público no Brasil passou por uma evolução normativa e conceitual significativa ao longo do tempo. 
+        De um modelo historicamente voltado ao controle do orçamento e dos fluxos financeiros do Tesouro, avançou-se para uma estrutura mais ampla, 
+        orientada também pela transparência, pela responsabilidade fiscal, pela padronização nacional e pelo enfoque patrimonial.
+
+        A linha do tempo a seguir apresenta, de forma resumida, os principais marcos dessa evolução, destacando como a Lei nº 4.320/1964, 
+        a Constituição Federal de 1988, a Lei de Responsabilidade Fiscal, a convergência às NBC TSP, a Matriz de Saldos Contábeis e o Ranking Siconfi 
+        contribuíram para a configuração do modelo atual.
+        """)
+
+        render_timeline()
+
+        st.markdown("""
+        <div class="light-box">
+            <h4>Síntese da evolução</h4>
+            <p>
+            Em termos didáticos, essa trajetória pode ser compreendida em três grandes fases:
+            <br><br>
+            <strong>1. Período anterior à Lei nº 4.320/1964:</strong> predominância do controle do Tesouro, com baixa padronização nacional;
+            <br>
+            <strong>2. Modelo estruturado pela Lei nº 4.320/1964:</strong> consolidação das normas gerais de direito financeiro e fortalecimento do enfoque orçamentário;
+            <br>
+            <strong>3. Modelo contemporâneo:</strong> ampliação da transparência fiscal, convergência às NBC TSP, padronização pelo PCASP, uso da MSC e avaliação da qualidade da informação no Siconfi.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+
+
         st.divider()
-        st.markdown('<div class="section-title">Normas Brasileiras de Contabilidade Aplicadas ao Setor Público </div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title">Normas Brasileiras de Contabilidade Aplicadas ao Setor Público</div>', unsafe_allow_html=True)
 
         img_col1, img_col2 = st.columns(2)
 
@@ -522,6 +617,10 @@ elif pagina in [
 ##################################################################################################################
 ##################################################################################################################
 
+    ########################################
+    ########    PLANO DE CONTAS     ########
+    ########################################
+
     if pagina == "Plano de Contas e Subsistemas":
         ##################################################################################################################
         # Seção: Plano de Contas e Subsistemas
@@ -571,11 +670,28 @@ elif pagina in [
         """
         )
 
+        st.divider()
+
+        img_col1, img_col2 = st.columns(2)
+
+        with img_col1:
+            st.image(
+                "imagens/pcasp_motivação_para_criação.png",  # imagem da página do pcasp_motivação_para_criação
+                caption="PCASP - Motivação para criação",
+                use_container_width=True
+            )
+
+        with img_col2:
+            st.image(
+                "imagens/pcasp_alcance.png",  # imagem da página do pcasp_alcance
+                caption="PCASP - Alcance",
+                use_container_width=True
+            )
 
         st.divider()
 
-        # Estrutura do PCASP
 
+        # Estrutura do PCASP
         st.markdown(
         '<div class="section-title">Estrutura do PCASP</div>',
         unsafe_allow_html=True
@@ -586,7 +702,6 @@ elif pagina in [
         Na contabilidade pública brasileira utiliza-se o **Plano de Contas Aplicado ao Setor Público (PCASP)**, organizado em classes numeradas de **1 a 8**.
         """
         )
-
 
         dados_pcasp = {
         "Classe": [
@@ -641,48 +756,6 @@ elif pagina in [
             unsafe_allow_html=True
             )
 
-        st.divider()
-
-        # Classificação das contas
-
-        st.markdown(
-        '<div class="section-title">Classificação das Contas</div>',
-        unsafe_allow_html=True
-        )
-
-        dados_class = {
-        "Critério": [
-        "Natureza do saldo",
-        "Utilização",
-        "Movimentação",
-        "Extensão"
-        ],
-
-        "Classificações": [
-        "Estáveis ou instáveis",
-        "Estáticas ou dinâmicas",
-        "Unilaterais ou bilaterais",
-        "Sintéticas ou analíticas"
-        ]
-        }
-
-        c1, c2 = st.columns([1.1, 0.9])
-
-        with c1:
-            df_class = pd.DataFrame(dados_class)
-            st.dataframe(df_class, hide_index=True, use_container_width=True)
-            
-        with c2:
-            st.markdown(
-            """
-            <div class="light-box">
-
-            <b>Contas sintéticas</b> representam contas de nível mais agregado.  
-            <b>Contas analíticas</b> representam o detalhamento das contas sintéticas, podendo chegar ao nível de <b>conta corrente</b>.
-            </div>
-            """,
-            unsafe_allow_html=True
-            )
 
         st.divider()
 
@@ -738,13 +811,76 @@ elif pagina in [
             )
 
         st.divider()
-        st.markdown('<div class="section-title">PCASP - Detalhamento do Código da Conta Contábil</div>', unsafe_allow_html=True)
+
+        c1, c2 = st.columns(2)
+
+        with c1:
+            st.image(
+                "imagens/pcasp_natureza_da_informação.png",  # imagem da página das pcasp_natureza_da_informação
+                caption="PCASP - naturezas da Informação",
+                use_container_width=True
+            )
+            
+        with c2:
+            st.image(
+                "imagens/pcasp_classes_e_subsistemas.png",  # imagem da página das pcasp_classes_e_subsistemas
+                caption="PCASP - Classes e Subsistemas",
+                use_container_width=True
+            )
+
+        st.divider()
+
+         # Classificação das contas
+
+        st.markdown(
+        '<div class="section-title">Classificação das Contas</div>',
+        unsafe_allow_html=True
+        )
+
+        dados_class = {
+        "Critério": [
+        "Natureza do saldo",
+        "Utilização",
+        "Movimentação",
+        "Extensão"
+        ],
+
+        "Classificações": [
+        "Estáveis ou instáveis",
+        "Estáticas ou dinâmicas",
+        "Unilaterais ou bilaterais",
+        "Sintéticas ou analíticas"
+        ]
+        }
+
+        c1, c2 = st.columns([1.1, 0.9])
+
+        with c1:
+            df_class = pd.DataFrame(dados_class)
+            st.dataframe(df_class, hide_index=True, use_container_width=True)
+            
+        with c2:
+            st.markdown(
+            """
+            <div class="light-box">
+
+            <b>Contas sintéticas</b> representam contas de nível mais agregado.  
+            <b>Contas analíticas</b> representam o detalhamento das contas sintéticas, podendo chegar ao nível de <b>conta corrente</b>.
+            </div>
+            """,
+            unsafe_allow_html=True
+            )
+
+        st.divider()
+
+
+        st.markdown('<div class="section-title">PCASP - Detalhamento do Código da Conta Contábil e Mecanismo de Consolidação</div>', unsafe_allow_html=True)
 
         img_col1, img_col2 = st.columns(2)
 
         with img_col1:
             st.image(
-                "imagens/mcasp_desdobramento_niveis_pcasp.png",  # imagem da página do Detalhamento dos Níveis das Contas do PCASP
+                "imagens/pcasp_estrutura_código_contábil.png",  # imagem da página do Detalhamento dos Níveis das Contas do PCASP
                 caption="PCASP - Níveis de desdobramento",
                 use_container_width=True
             )
@@ -774,7 +910,7 @@ elif pagina in [
 
         with img_col2:
             st.image(
-                "imagens/mcasp_niveis_de_consolidacao_pcasp.png",  # imagem da página dos Níveis de Consolidação (OFSS) do PCASP
+                "imagens/pcasp_mecanismo_de_consolidação.png",  # imagem da página dos Níveis de Consolidação (OFSS) do PCASP
                 caption="PCASP - Níveis de Consolidação (OFSS)",
                 use_container_width=True
             )
@@ -1288,31 +1424,32 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
 
     st.markdown("### ✍️ Com base nas informações abaixo, sobre os atos e fatos de um determinado ente no ano X26, lance e contabilize nos razonetes disponíveis por conta contábil:")
 
-    c3, c4 = st.columns([1.05, 0.95])
+    if pagina == "Exercícios e Cases I":
+        c3, c4 = st.columns([1.05, 0.95])
 
-    with c3:
-        st.markdown('<div class="section-title">Atos e Fatos Janeiro</div>', unsafe_allow_html=True)
-        for item in sec["fatos_janeiro"]:
-            st.markdown(
-                f"""
-                <div class="light-box">
-                    <p>{item}</p>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+        with c3:
+            st.markdown('<div class="section-title">Atos e Fatos Janeiro</div>', unsafe_allow_html=True)
+            for item in sec["fatos_janeiro"]:
+                st.markdown(
+                    f"""
+                    <div class="light-box">
+                        <p>{item}</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 
-    with c4:
-        st.markdown('<div class="section-title">Atos e Fatos Dezembro</div>', unsafe_allow_html=True)
-        for item in sec["fatos_dezembro"]:
-            st.markdown(
-                f"""
-                <div class="light-box">
-                    <p>{item}</p>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+        with c4:
+            st.markdown('<div class="section-title">Atos e Fatos Dezembro</div>', unsafe_allow_html=True)
+            for item in sec["fatos_dezembro"]:
+                st.markdown(
+                    f"""
+                    <div class="light-box">
+                        <p>{item}</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
     
 
     

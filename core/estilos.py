@@ -103,4 +103,204 @@ def aplicar_estilos():
         }
         </style>
         """, unsafe_allow_html=True)
-    
+
+
+import streamlit.components.v1 as components
+
+def render_timeline():
+    html = """
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: transparent;
+    }
+
+    .timeline-wrapper {
+        padding: 10px 10px 0 10px;
+        overflow-x: auto;
+    }
+
+    .timeline {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        min-width: 1450px;
+        padding: 80px 20px 40px 20px;
+    }
+
+    .timeline::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 40px;
+        right: 40px;
+        height: 6px;
+        background: linear-gradient(90deg, #2563eb, #0ea5e9);
+        border-radius: 999px;
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+
+    .timeline-item {
+        position: relative;
+        width: 180px;
+        text-align: center;
+        z-index: 2;
+        flex-shrink: 0;
+    }
+
+    .timeline-dot {
+        width: 22px;
+        height: 22px;
+        background: #2563eb;
+        border: 4px solid white;
+        border-radius: 50%;
+        margin: 0 auto;
+        box-shadow: 0 0 0 3px #93c5fd;
+        position: relative;
+        z-index: 3;
+    }
+
+    .timeline-year {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 12px;
+        margin-top: 12px;
+    }
+
+    .timeline-card {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 14px 12px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        min-height: 145px;
+    }
+
+    .timeline-card h4 {
+        margin: 0 0 8px 0;
+        font-size: 1rem;
+        color: #0f172a;
+    }
+
+    .timeline-card p {
+        margin: 0;
+        font-size: 0.88rem;
+        color: #475569;
+        line-height: 1.4;
+    }
+
+    .timeline-top {
+        margin-bottom: 28px;
+    }
+
+    .timeline-bottom {
+        margin-top: 28px;
+    }
+
+    .timeline-connector-top,
+    .timeline-connector-bottom {
+        width: 2px;
+        height: 45px;
+        background: #cbd5e1;
+        margin: 0 auto;
+    }
+    </style>
+
+    <div class="timeline-wrapper">
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-top">
+                    <div class="timeline-card">
+                        <h4>Período pré-1964</h4>
+                        <p>Predomínio do controle do Tesouro, foco em caixa e baixa padronização entre os entes públicos.</p>
+                    </div>
+                    <div class="timeline-connector-top"></div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">Antes de 1964</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">1964</div>
+                <div class="timeline-bottom">
+                    <div class="timeline-connector-bottom"></div>
+                    <div class="timeline-card">
+                        <h4>Lei nº 4.320</h4>
+                        <p>Normas gerais de direito financeiro e estruturação clássica da contabilidade pública.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-top">
+                    <div class="timeline-card">
+                        <h4>Constituição Federal</h4>
+                        <p>Fortalecimento do planejamento governamental por meio do PPA, da LDO e da LOA.</p>
+                    </div>
+                    <div class="timeline-connector-top"></div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">1988</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2000</div>
+                <div class="timeline-bottom">
+                    <div class="timeline-connector-bottom"></div>
+                    <div class="timeline-card">
+                        <h4>Lei de Responsabilidade Fiscal</h4>
+                        <p>Transparência, metas, limites e fortalecimento do controle das finanças públicas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-top">
+                    <div class="timeline-card">
+                        <h4>Início da Convergência aos Padrões Internacionais </h4>
+                        <p>Início da transição do foco predominantemente orçamentário para o enfoque patrimonial através das NBC TSP.</p>
+                    </div>
+                    <div class="timeline-connector-top"></div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2008</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2013+</div>
+                <div class="timeline-bottom">
+                    <div class="timeline-connector-bottom"></div>
+                    <div class="timeline-card">
+                        <h4>MCASP e PCASP</h4>
+                        <p>Início da obrigatoriedade dos novos procedimentos contábeis e elaboração de um plano de contas padronizado com abrangência nacional.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-top">
+                    <div class="timeline-card">
+                        <h4>Matriz de Saldos Contábeis e o Ranking Siconfi</h4>
+                        <p>Implantação da Matriz de Saldos Contábeis e avaliação da qualidade e consistência da informação contábil e fiscal dos entes.</p>
+                    </div>
+                    <div class="timeline-connector-top"></div>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2019+</div>
+            </div>
+
+        </div>
+    </div>
+    """
+
+    components.html(html, height=430, scrolling=True)
+
