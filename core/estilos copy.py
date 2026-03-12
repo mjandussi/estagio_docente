@@ -143,7 +143,7 @@ def render_timeline():
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        min-width: 1200px;
+        min-width: 1650px;
         padding: 90px 20px 55px 20px;
         box-sizing: border-box;
     }
@@ -163,7 +163,7 @@ def render_timeline():
 
     .timeline-item {
         position: relative;
-        width: 160px;
+        width: 210px;
         text-align: center;
         z-index: 2;
         flex-shrink: 0;
@@ -182,7 +182,7 @@ def render_timeline():
     }
 
     .timeline-year {
-        font-size: 1.25rem;
+        font-size: 1.05rem;
         font-weight: 700;
         color: #60a5fa;
         margin-bottom: 12px;
@@ -195,13 +195,13 @@ def render_timeline():
         border-radius: 18px;
         padding: 16px 14px;
         box-shadow: 0 8px 24px rgba(15, 23, 42, 0.10);
-        min-height: 150px;
+        min-height: 190px;
         box-sizing: border-box;
     }
 
     .timeline-card h4 {
         margin: 0 0 10px 0;
-        font-size: 0.95rem;
+        font-size: 1.05rem;
         line-height: 1.2;
         color: #0f172a;
     }
