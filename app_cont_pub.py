@@ -555,58 +555,76 @@ elif pagina in [
         """
         )
 
-        dados = {
-            "Tópico Analisado": [
-                "Legislação básica",
-                "Regime Contábil",
-                "Resultado",
-                "Controle Interno",
-                "Demonstrações",
-                "Prestação de contas",
-                "Orçamento",
-                "Sistemas de contas",
-                "Registros",
-                "Contas de resultado",
-                "Legalidade",
-                "Agentes responsáveis",
-                "Princípios"
-            ],
+        img_col1, img_col2 = st.columns(2)
 
-            "Contabilidade Societária": [
-                "Lei 6.404/76, 11.638/07 e 11.941/09",
-                "Competência",
-                "Lucro ou prejuízo do exercício",
-                "Auditoria interna vinculada à administração",
-                "Balanço Patrimonial, DRE, DFC, DMPL, DVA",
-                "Conselho de administração e acionistas",
-                "Orçamento operacional ou financeiro",
-                "Sistema único de contas",
-                "Registro principalmente de fatos",
-                "Receitas e despesas",
-                "Permitido fazer o que a lei não proíbe",
-                "Diretores, gerentes e administradores",
-                "Princípios de Contabilidade"
-            ],
+        with img_col1:
+            st.image(
+                "imagens/Cont.societária versus Pública_parte 1.png",  # imagem da Contabilidade Societária X Pública
+                caption="Contabilidade Societária X Pública",
+                use_container_width=True
+            )
 
-            "Contabilidade Pública": [
-                "Lei 4.320/64, Lei 8.666/93, LC 101/00 e NBC TSP",
-                "Orçamentário = misto / Patrimonial = competência",
-                "Superávit ou déficit da gestão",
-                "Controle para cumprimento da legislação e responsabilização de agentes públicos",
-                "Balanço Orçamentário, Patrimonial, Financeiro, DVP, DFC e Notas Explicativas",
-                "Poder Legislativo (Tribunais de Contas) e sociedade",
-                "PPA, LDO e LOA",
-                "Sistemas: orçamentário, patrimonial, compensação e custos",
-                "Registro de atos e fatos",
-                "Ingressos e dispêndios",
-                "Permitido fazer apenas o que a lei autoriza",
-                "Ordenador de despesas e responsáveis por bens e valores",
-                "Princípios Contábeis e Princípios Orçamentários"
-            ]
-        }
+        with img_col2:
+            st.image(
+                "imagens/Cont.societária versus Pública_parte 2.png",  # imagem da Contabilidade Societária X Pública
+                caption="Contabilidade Societária X Pública",
+                use_container_width=True
+            )
 
-        df_dif_entre_conts = pd.DataFrame(dados)
-        st.dataframe(df_dif_entre_conts, hide_index=True, use_container_width=True)
+        st.divider()
+
+        # dados = {
+        #     "Tópico Analisado": [
+        #         "Legislação básica",
+        #         "Regime Contábil",
+        #         "Resultado",
+        #         "Controle Interno",
+        #         "Demonstrações",
+        #         "Prestação de contas",
+        #         "Orçamento",
+        #         "Sistemas de contas",
+        #         "Registros",
+        #         "Contas de resultado",
+        #         "Legalidade",
+        #         "Agentes responsáveis",
+        #         "Princípios"
+        #     ],
+
+        #     "Contabilidade Societária": [
+        #         "Lei 6.404/76, 11.638/07 e 11.941/09",
+        #         "Competência",
+        #         "Lucro ou prejuízo do exercício",
+        #         "Auditoria interna vinculada à administração",
+        #         "Balanço Patrimonial, DRE, DFC, DMPL, DVA",
+        #         "Conselho de administração e acionistas",
+        #         "Orçamento operacional ou financeiro",
+        #         "Sistema único de contas",
+        #         "Registro principalmente de fatos",
+        #         "Receitas e despesas",
+        #         "Permitido fazer o que a lei não proíbe",
+        #         "Diretores, gerentes e administradores",
+        #         "Princípios de Contabilidade"
+        #     ],
+
+        #     "Contabilidade Pública": [
+        #         "Lei 4.320/64, Lei 8.666/93, LC 101/00 e NBC TSP",
+        #         "Orçamentário = misto / Patrimonial = competência",
+        #         "Superávit ou déficit da gestão",
+        #         "Controle para cumprimento da legislação e responsabilização de agentes públicos",
+        #         "Balanço Orçamentário, Patrimonial, Financeiro, DVP, DFC e Notas Explicativas",
+        #         "Poder Legislativo (Tribunais de Contas) e sociedade",
+        #         "PPA, LDO e LOA",
+        #         "Sistemas: orçamentário, patrimonial, compensação e custos",
+        #         "Registro de atos e fatos",
+        #         "Ingressos e dispêndios",
+        #         "Permitido fazer apenas o que a lei autoriza",
+        #         "Ordenador de despesas e responsáveis por bens e valores",
+        #         "Princípios Contábeis e Princípios Orçamentários"
+        #     ]
+        # }
+
+        # df_dif_entre_conts = pd.DataFrame(dados)
+        # st.dataframe(df_dif_entre_conts, hide_index=True, use_container_width=True)
 
 ##################################################################################################################
 ##################################################################################################################
@@ -904,10 +922,87 @@ elif pagina in [
 
         with img_col2:
             st.image(
+                "imagens/pcasp_estrutura_básica_.png",  # imagem da página Estrutura Básica do PCASP
+                caption="PCASP - Estrutura Básica",
+                use_container_width=True
+            )
+
+        st.divider()
+
+        st.markdown('<div class="section-title">Níveis de Consolidação</div>', unsafe_allow_html=True)
+
+        img_col1, img_col2 = st.columns(2)
+
+        with img_col1:
+            st.image(
                 "imagens/pcasp_mecanismo_de_consolidação.png",  # imagem da página dos Níveis de Consolidação (OFSS) do PCASP
                 caption="PCASP - Níveis de Consolidação (OFSS)",
                 use_container_width=True
             )
+
+        with img_col2:
+            st.image(
+                "imagens/pcasp_calculo_da_consolidação.png",  # imagem da página Cálculo de Consolidação (OFSS) do PCASP
+                caption="PCASP - Cálculo da Consolidação (OFSS)",
+                use_container_width=True
+            )
+
+        st.divider()
+
+        st.markdown('<div class="section-title">Atributos da Conta Contábil</div>', unsafe_allow_html=True)
+
+        img_col1, img_col2 = st.columns(2)
+
+        with img_col1:
+            st.image(
+                "imagens/pcasp_atributos.png",  # imagem da página dos atributos do PCASP
+                caption="PCASP - Atributos da Conta Contábil",
+                use_container_width=True
+            )
+
+        with img_col2:
+            st.image(
+                "imagens/pcasp_atributos_2.png",  # imagem da página dos atributos do PCASP
+                caption="PCASP - Atributos F e P",
+                use_container_width=True
+            )
+
+        st.divider()
+
+        st.markdown('<div class="section-title">Regras de Integridade do PCASP</div>', unsafe_allow_html=True)
+
+        img_col1, img_col2 = st.columns(2)
+
+        with img_col1:
+            st.image(
+                "imagens/pcasp_integridade_regra1.png",  # imagem da página das Regras de Integridade do PCASP
+                caption="PCASP - Regras de Integridade 1",
+                use_container_width=True
+            )
+
+        with img_col2:
+            st.image(
+                "imagens/pcasp_integridade_regra2.png",  # imagem da página das Regras de Integridade do PCASP
+                caption="PCASP - Regras de Integridade 2",
+                use_container_width=True
+            )
+
+        img_col1, img_col2 = st.columns(2)
+
+        with img_col1:
+            st.image(
+                "imagens/pcasp_integridade_regra3.png",  # imagem da página das Regras de Integridade do PCASP
+                caption="PCASP - Regras de Integridade 3",
+                use_container_width=True
+            )
+
+        with img_col2:
+            st.image(
+                "imagens/pcasp_integridade_regra4.png",  # imagem da página das Regras de Integridade do PCASP
+                caption="PCASP - Regras de Integridade 4",
+                use_container_width=True
+            )
+
 
         st.divider()
 
@@ -1481,13 +1576,12 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
             "Receita a Tributária a Receber",
             "Dívida Ativa Tributária",
             "Estoque de Materiais",
-            "Obras em Andamento",
             "Bens Móveis",
             "Bens Imóveis",
             "Depósito de Terceiros",
             "Consignações",
             "Pessoal a Pagar",
-            "Fornecedores",
+            "Fornecedores a Pagar",
             "Empréstimos Concedidos",
             "Empréstimos Contraídos",
             "Dívida Fundada",
@@ -1717,63 +1811,63 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
         st.divider()
 
 
-        #############################################################
+        # #############################################################
 
-        st.markdown("## Balanço Patrimonial Interativo")
+        # st.markdown("## Balanço Patrimonial Interativo")
 
-        df_ativo = pd.DataFrame({
-            "Conta": ["Caixa", "Créditos a Receber", "Imobilizado"],
-            "Valor": [0.0, 0.0, 0.0]
-        })
+        # df_ativo = pd.DataFrame({
+        #     "Conta": ["Banco Conta Única", "Receita a Tributária a Receber", "Dívida Ativa Tributária", "Estoque de Materiais", "Bens Móveis", "Bens Imóveis",],
+        #     "Valor": [0.0, 0.0, 0.0]
+        # })
 
-        df_passivo_pl = pd.DataFrame({
-            "Conta": ["Fornecedores", "Obrigações", "Patrimônio Líquido"],
-            "Valor": [0.0, 0.0, 0.0]
-        })
+        # df_passivo_pl = pd.DataFrame({
+        #     "Conta": ["Pessoal a Pagar", "Fornecedores a Pagar", "Consignações", "Saldo Patrimonial"],
+        #     "Valor": [0.0, 0.0, 0.0]
+        # })
 
-        col1, col2 = st.columns(2)
+        # col1, col2 = st.columns(2)
 
-        with col1:
-            st.markdown("### Ativo")
-            ativo_edit = st.data_editor(
-                df_ativo,
-                hide_index=True,
-                use_container_width=True,
-                num_rows="dynamic",
-                column_config={
-                    "Conta": st.column_config.TextColumn("Conta", width="medium"),
-                    "Valor": st.column_config.NumberColumn("Valor", format="%.2f", width="small")
-                },
-                key="ativo_editor"
-            )
+        # with col1:
+        #     st.markdown("### Ativo")
+        #     ativo_edit = st.data_editor(
+        #         df_ativo,
+        #         hide_index=True,
+        #         use_container_width=True,
+        #         num_rows="dynamic",
+        #         column_config={
+        #             "Conta": st.column_config.TextColumn("Conta", width="medium"),
+        #             "Valor": st.column_config.NumberColumn("Valor", format="%.2f", width="small")
+        #         },
+        #         key="ativo_editor"
+        #     )
 
-        with col2:
-            st.markdown("### Passivo + Patrimônio Líquido")
-            passivo_edit = st.data_editor(
-                df_passivo_pl,
-                hide_index=True,
-                use_container_width=True,
-                num_rows="dynamic",
-                column_config={
-                    "Conta": st.column_config.TextColumn("Conta", width="medium"),
-                    "Valor": st.column_config.NumberColumn("Valor", format="%.2f", width="small")
-                },
-                key="passivo_editor"
-            )
+        # with col2:
+        #     st.markdown("### Passivo + Patrimônio Líquido")
+        #     passivo_edit = st.data_editor(
+        #         df_passivo_pl,
+        #         hide_index=True,
+        #         use_container_width=True,
+        #         num_rows="dynamic",
+        #         column_config={
+        #             "Conta": st.column_config.TextColumn("Conta", width="medium"),
+        #             "Valor": st.column_config.NumberColumn("Valor", format="%.2f", width="small")
+        #         },
+        #         key="passivo_editor"
+        #     )
 
-        total_ativo = ativo_edit["Valor"].fillna(0).sum()
-        total_passivo = passivo_edit["Valor"].fillna(0).sum()
+        # total_ativo = ativo_edit["Valor"].fillna(0).sum()
+        # total_passivo = passivo_edit["Valor"].fillna(0).sum()
 
-        st.markdown("### Totais")
+        # st.markdown("### Totais")
 
-        c1, c2 = st.columns(2)
-        with c1:
-            st.metric("Total do Ativo", f"R$ {total_ativo:,.2f}")
-        with c2:
-            st.metric("Total do Passivo + PL", f"R$ {total_passivo:,.2f}")
+        # c1, c2 = st.columns(2)
+        # with c1:
+        #     st.metric("Total do Ativo", f"R$ {total_ativo:,.2f}")
+        # with c2:
+        #     st.metric("Total do Passivo + PL", f"R$ {total_passivo:,.2f}")
 
-        if round(total_ativo, 2) == round(total_passivo, 2):
-            st.success("Balanço em equilíbrio: Ativo = Passivo + Patrimônio Líquido.")
-        else:
-            diferenca = total_ativo - total_passivo
-            st.warning(f"Balanço sem equilíbrio. Diferença: R$ {diferenca:,.2f}")
+        # if round(total_ativo, 2) == round(total_passivo, 2):
+        #     st.success("Balanço em equilíbrio: Ativo = Passivo + Patrimônio Líquido.")
+        # else:
+        #     diferenca = total_ativo - total_passivo
+        #     st.warning(f"Balanço sem equilíbrio. Diferença: R$ {diferenca:,.2f}")
