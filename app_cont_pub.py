@@ -381,12 +381,17 @@ elif pagina == "Programa da Disciplina":
                     <p><a href="https://www.tesourotransparente.gov.br/publicacoes/manual-de-contabilidade-aplicada-ao-setor-publico-mcasp/2025/26" target="_blank">
                     Acessar página do MCASP
                     </a></p>
+                    </a></p>
+                    <p><a href="https://siconfi.tesouro.gov.br/siconfi/pages/public/conteudo/conteudo.jsf?id=12503" target="_blank">
+                    Acessar página do Anexo II da Portaria STN 642, de 20 de Setembro de 2019 (Leiaute MSC)
+                    </a></p>
                 </div>
                 """,
                 unsafe_allow_html=True
             )
         st.markdown(f'<div class="box"><h4>1.7 Curriculum resumido do professor</h4><p>{sec["curriculum"]}</p></div>', unsafe_allow_html=True)
         
+
 
 ##################################################################################################################
 ##################################################################################################################
@@ -884,17 +889,6 @@ elif pagina in [
                 caption="PCASP - Níveis de desdobramento",
                 use_container_width=True
             )
-            # st.markdown(
-            #     """
-            #     <div class="light-box">
-            #         <h4>Link de acesso</h4>
-            #         <p><a href="https://siconfi.tesouro.gov.br/siconfi/pages/public/conteudo/conteudo.jsf?id=12503" target="_blank">
-            #         Acessar página do Anexo II da Portaria STN 642, de 20 de Setembro de 2019 (Leiaute MSC)
-            #         </a></p>
-            #     </div>
-            #     """,
-            #     unsafe_allow_html=True
-            # )
 
             st.markdown(
                 """
