@@ -171,7 +171,7 @@ SECOES = {
         # ]
         "fatos_janeiro": [
         "0) Lançamento inicial de constituição do ente fictício no valor de R$ 1.000.000,00 contra as contas de Banco e Saldo Patrimonial.",
-        "1) O orçamento anual foi fixado em R$ 2.000.000,00, em equilíbrio entre receitas e despesas.",
+        "1) O orçamento anual foi fixado em R$ 2.000.000,00, em equilíbrio entre receitas e despesas, sendo 70% Corrente e o restante Capital.",
         "2) Houve empenho para pagamento da folha de pessoal no valor correspondente a 1/12 do custo anual de R$ 1.200.000,00.",
         "3) Houve a liquidação da folha de pessoal, com retenção de contribuição previdenciária de 11%.",
         "4) Houve o pagamento líquido da folha aos servidores.",
@@ -1450,74 +1450,69 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
     st.divider()
 
     ###############################################################
-
     # SEÇÃO DOS RAZONETES
+    ###############################################################
 
+
+    # ==========================================
+    # CONTAS AGRUPADAS POR NATUREZA
+    # ==========================================
+    CONTAS_POR_CATEGORIA = {
+        "Orçamentária": [
+            "Previsão Inicial da Receita",
+            "Receita a Realizar Co",
+            "Receita a Realizar Cap",
+            "Receita Realizada Co",
+            "Receita Realizada Cap",
+            "Crédito Inicial",
+            "Crédito Disponível Co",
+            "Crédito Disponível Cap",
+            "Despesa ou Créditos Empenhados Co",
+            "Despesa ou Créditos Empenhados Cap",
+            "Despesa ou Créditos Liquidados Co",
+            "Despesa ou Créditos Liquidados Cap",
+            "Despesa ou Créditos Pagos Co",
+            "Despesa ou Créditos Pagos Cap",
+            "Inscrição de Restos a Pagar Não Processado",
+            "Inscrição de Restos a Pagar Processado",
+        ],
+        "Patrimonial": [
+            "Banco Conta Única",
+            "Receita a Tributária a Receber",
+            "Dívida Ativa Tributária",
+            "Estoque de Materiais",
+            "Obras em Andamento",
+            "Bens Móveis",
+            "Bens Imóveis",
+            "Depósito de Terceiros",
+            "Consignações",
+            "Pessoal a Pagar",
+            "Fornecedores",
+            "Empréstimos Concedidos",
+            "Empréstimos Contraídos",
+            "Dívida Fundada",
+            "Saldo Patrimonial",
+            "Variação Aumentativa: Receita Corrente",
+            "Variação Aumentativa: Transferência de Cap",
+            "Variação Aumentativa Indep. Orçamento",
+            "Variação Diminutiva: Despesa Corrente",
+            "Variação Diminutiva Indep. Orçamento",
+        ],
+        "Controle / Compensação": [
+            "Disponibilidade por Fonte Corrente",
+            "Disponibilidade por Fonte Capital",
+            "Disponibilidade Financeira",
+        ]
+    }
+
+    # Lista única com todas as contas
     CONTAS_FIXAS = [
-
-    # ================================
-    # CONTAS ORÇAMENTÁRIAS
-    # ================================
-
-    "Previsão Inicial da Receita",
-    "Receita a Realizar Co",
-    "Receita a Realizar Cap",
-    "Receita Realizada Co",
-    "Receita Realizada Cap",
-
-    "Orçamento da Despesa",
-    "Crédito Disponível Co",
-    "Crédito Disponível Cap",
-    "Despesa ou Créditos Empenhados Co",
-    "Despesa ou Créditos Empenhados Cap",
-    "Despesa ou Créditos Liquidados Co",
-    "Despesa ou Créditos Liquidados Cap",
-    "Despesa ou Créditos Pagos Co",
-    "Despesa ou Créditos Pagos Cap",
-
-    "Inscrição de Restos a Pagar Não Processado",
-    "Inscrição de Restos a Pagar Processado",
-
-    # ================================
-    # CONTAS PATRIMONIAIS
-    # ================================
-
-    "Banco Conta Única",
-    "Receita a Tributária a Receber",
-    "Dívida Ativa Tributária",
-
-    "Estoque de Materiais",
-    "Obras em Andamento",
-    "Bens Móveis",
-    "Bens Imóveis",
-
-    "Depósito de Terceiros",
-    "Consignações",
-    "Pessoal a Pagar",
-    "Fornecedores",
-
-    "Empréstimos Concedidos",
-    "Empréstimos Contraídos",
-    "Dívida Fundada",
-    "Saldo Patrimonial",
-
-    "Variação Aumentativa: Receita Corrente",
-    "Variação Aumentativa: Transferência de Cap",
-    "Variação Aumentativa Indep. Orçamento",
-
-    "Variação Diminutiva: Despesa Corrente",
-    "Variação Diminutiva Indep. Orçamento",
-
-    # ================================
-    # CONTAS DE CONTROLE / COMPENSAÇÃO
-    # ================================
-
-    "Disponibilidade por Fonte Corrente",
-    "Disponibilidade por Fonte Capital",
-    "Disponibilidade Financeira"
-
+        conta
+        for lista_contas in CONTAS_POR_CATEGORIA.values()
+        for conta in lista_contas
     ]
 
+    # Inicializa os razonetes no session_state
     if "razoes" not in st.session_state:
         st.session_state.razoes = {}
 
@@ -1539,30 +1534,36 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
             "**exporte o arquivo Excel dos Razonetes do exercício antes de sair do app.**"
         )
 
-
         # ==========================================
         # ESCOLHA DA CONTA
         # ==========================================
         st.markdown(
             """
             <div class="light-box">
-
-            Sigas os passos abaixo para efetuar os registros nos razonetes
-
+            Siga os passos abaixo para efetuar os registros nos razonetes
             <ul>
-                <li>1) Escolha abaixo a conta a ser preenchida no razonete (lógica das partidas dobradas)</li>
-                <li>2) Digite no quadro/tabela o respectivo valor a ser lançado na coluna de débito ou crédito</li>
+                <li>1) Escolha a natureza da conta</li>
+                <li>2) Escolha a conta a ser preenchida</li>
+                <li>3) Digite no quadro/tabela o respectivo valor a ser lançado na coluna de débito ou crédito</li>
             </ul>
             </div>
             """,
             unsafe_allow_html=True
-            )
-        
-                    
-        conta_escolhida = st.selectbox(
-            "Selecione a conta para preencher",
-            CONTAS_FIXAS
         )
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            categoria_escolhida = st.selectbox(
+                "Selecione a natureza da conta",
+                list(CONTAS_POR_CATEGORIA.keys())
+            )
+
+        with col2:
+            conta_escolhida = st.selectbox(
+                "Selecione a conta para preencher",
+                CONTAS_POR_CATEGORIA[categoria_escolhida]
+            )
 
         df_conta = st.session_state.razoes[conta_escolhida]
 
@@ -1587,6 +1588,7 @@ elif pagina in ["Exercícios e Cases I", "Exercícios e Cases II"]:
         saldo = total_debito - total_credito
 
         st.markdown(f"### Conta: {conta_escolhida}")
+        st.caption(f"Natureza: {categoria_escolhida}")
 
         c1, c2, c3 = st.columns(3)
         with c1:
